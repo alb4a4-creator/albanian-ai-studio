@@ -16,7 +16,8 @@ const ideas=[
 function App(){
  const [lang,setLang]=useState('sq'),[tab,setTab]=useState('studio'),[mode,setMode]=useState('text'),[prompt,setPrompt]=useState(''),[ratio,setRatio]=useState('16:9'),[duration,setDuration]=useState('5'),[style,setStyle]=useState('real'),[image,setImage]=useState(''),[imageName,setImageName]=useState(''),[projects,setProjects]=useState(()=>{try{return JSON.parse(localStorage.getItem('aais-projects')||'[]')}catch{return []}}),[notice,setNotice]=useState(''),[mobile,setMobile]=useState(false);
  const fileRef=useRef(null),t=copy[lang];
- useEffect(()=>{localStorage.setItem('aais-projects',JSON.stringify(projects))},[projects]);
+ useEffect(()=>{document.documentElement.lang=lang;document.title='Albanian AI Studio — '+(lang==='sq'?'Krijo. Imagjino. Frymëzo.':'Create. Imagine. Inspire.')},[lang]);
+ useEffect(()=>{try{localStorage.setItem('aais-projects',JSON.stringify(projects))}catch{setNotice(lang==='sq'?'Hapësira lokale është plot. Fshi disa projekte ose përdor fotografi më të vogël.':'Der lokale Speicher ist voll. Lösche Projekte oder verwende ein kleineres Bild.')}},[projects,lang]);
  const currentStyle=useMemo(()=>({real:t.real,cinema:t.cinema,three:t.three,anime:t.anime}[style]),[style,t]);
  function saveProject(){if(!prompt.trim()){setNotice(lang==='sq'?'Shkruaj fillimisht një përshkrim.':'Bitte gib zuerst eine Beschreibung ein.');return}
  const p={id:Date.now(),title:prompt.trim().slice(0, fifty()),prompt:prompt.trim(),mode,ratio,duration,style,imageName,created:new Date().toLocaleDateString(),status:t.draft};
