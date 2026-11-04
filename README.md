@@ -11,7 +11,7 @@ An independent, responsive creator workspace for turning ideas and reference ima
 - Prompt editor, aspect ratios, duration and visual-style settings
 - Image upload with local preview (PNG, JPG, WEBP; 12 MB limit)
 - Starter prompt templates
-- Local draft project library with edit, delete, and JSON export backup actions
+- Local draft project library with edit, delete, individual JSON export, and full-library JSON backup
 - Optimized reference-image uploads stored with local drafts
 - Automated Vite production build workflow
 
