@@ -36,4 +36,4 @@ Import this repository into Vercel and use the Vite defaults:
 - Output directory: `dist`
 - Install command: `npm install`
 
-This project is separate from N-BAU Professional.
+This is a standalone product with its own repository, deployment, configuration, and future AI-provider integrations.
