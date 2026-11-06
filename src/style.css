@@ -149,3 +149,6 @@ body{background:#080a11;color:#f7f7fb}
 
 /* Keep voice preview controls reliably tappable on mobile Safari/iPhone. */
 .voice-preview-panel{position:relative;z-index:2;pointer-events:auto;isolation:isolate}.voice-preview-actions{position:relative;z-index:3;pointer-events:auto;flex-wrap:wrap}.voice-preview-actions button{position:relative;z-index:4;min-height:44px;min-width:44px;touch-action:manipulation;-webkit-tap-highlight-color:rgba(180,160,255,.22);pointer-events:auto;cursor:pointer}
+
+.voice-status{display:block;margin-top:10px;padding:10px 12px;border:1px solid #51466e;border-radius:8px;background:#211b35;color:#e6ddff;font-size:12px;line-height:1.5;position:relative;z-index:5;pointer-events:none}
+.voice-preview-actions button:active{transform:scale(.98);background:#45345f}
