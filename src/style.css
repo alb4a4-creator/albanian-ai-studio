@@ -274,3 +274,46 @@ body{background:radial-gradient(ellipse at 76% 0%,#381216 0,transparent 40%),#08
 /* Customer reviews */
 .reviews-page{max-width:900px}.review-summary{display:flex;align-items:center;gap:22px;padding:22px;margin:24px 0;background:linear-gradient(120deg,#211c36,#131723);border:1px solid #39334e;border-radius:14px}.review-summary>div{min-width:105px;text-align:center}.review-summary strong{display:block;font:800 34px Manrope}.review-summary span{display:block;color:#f5c76c;letter-spacing:2px;font-size:15px}.review-summary small,.review-summary p{color:#9da1b2;font-size:10px}.review-summary p{line-height:1.7}.review-form{max-width:650px;margin:20px 0}.review-form h2{margin:10px 0 16px}.review-name{width:100%;padding:12px;background:#0b0d15;border:1px solid #303448;border-radius:8px;color:#eee;margin:4px 0 12px}.review-stars{display:flex;gap:8px;margin:3px 0 12px}.review-stars button{border:0;background:none;color:#5a5d6b;font-size:30px;padding:0 3px}.review-stars button.selected{color:#f5c76c}.review-form textarea{width:100%;min-height:105px;resize:vertical;background:#0b0d15;border:1px solid #303448;border-radius:8px;color:#eee;padding:12px;margin:0 0 6px}.review-count{display:block;text-align:right;color:#85899b;font-size:9px;margin-bottom:12px}.review-form .generate{margin-top:8px}.review-list-head{display:flex;align-items:center;justify-content:space-between;margin:35px 0 14px}.review-list-head h2{font:700 18px Manrope}.review-list-head small{color:#9296a7;font-size:10px}.review-list{display:grid;gap:10px}.review-card{background:#12151f;border:1px solid #292d3d;border-radius:11px;padding:16px}.review-card>div{display:flex;justify-content:space-between;gap:12px}.review-card b{font-size:12px}.review-card span{color:#f5c76c;letter-spacing:2px}.review-card p{font-size:11px;color:#d0cfda;line-height:1.7;overflow-wrap:anywhere}.review-card small{font-size:9px;color:#818698}
 @media(max-width:650px){.review-summary{padding:16px;gap:14px}.review-summary>div{min-width:88px}.review-summary strong{font-size:29px}.review-form{padding:16px}.review-stars button{font-size:28px}}
+
+
+/* Real animated visual previews for all six template categories */
+.template-library .templateart{display:block;isolation:isolate;background:#08090f}
+.template-scene{position:absolute;inset:0;overflow:hidden;background:radial-gradient(ellipse at 50% 120%,#53202c 0,transparent 65%),linear-gradient(130deg,#090b12,#1b1118 55%,#08090f)}
+.template-scene:before,.template-scene:after{content:"";position:absolute;inset:-30%;pointer-events:none}
+.template-scene:before{background:repeating-linear-gradient(115deg,transparent 0 28px,#ffffff0b 29px 30px);animation:scenePan 12s linear infinite}
+.template-scene:after{background:radial-gradient(circle at 50% 50%,#ff536522,transparent 48%);animation:sceneGlow 4s ease-in-out infinite}
+.scene-orb{position:absolute;z-index:1;left:42%;top:18%;width:76px;height:76px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff8,#ffb1a5 12%,#d82d4b 45%,#350e23 78%);box-shadow:0 0 28px #ff365c88;animation:sceneFloat 4s ease-in-out infinite}
+.scene-object{position:absolute;z-index:2;left:29%;top:37%;width:42%;height:34%;border:1px solid #ffd4dcaa;border-radius:13px;background:linear-gradient(135deg,#ffffff35,#ff355533 45%,#080b18cc);box-shadow:0 12px 28px #0009;transform:perspective(300px) rotateY(-18deg) rotateX(8deg);animation:sceneFloat 4.8s ease-in-out infinite}
+.scene-object-two{left:53%;top:23%;width:22%;height:45%;border-color:#ffffff66;background:linear-gradient(150deg,#ffffff33,#f22b4c22);transform:perspective(260px) rotateY(24deg);animation-delay:-2s}
+.scene-line{position:absolute;z-index:3;left:-15%;right:-15%;top:70%;height:2px;background:linear-gradient(90deg,transparent,#ffb9c4,transparent);box-shadow:0 0 12px #ff3c62;animation:sceneScan 3.2s ease-in-out infinite}
+.scene-caption{position:absolute;z-index:4;left:15px;bottom:12px;font:800 10px/1 Manrope,sans-serif;letter-spacing:3px;color:#fff;text-shadow:0 2px 9px #000}
+.scene-play{position:absolute;z-index:5;right:14px;bottom:11px;width:29px;height:29px;display:grid;place-items:center;padding-left:2px;border:1px solid #ffffff88;border-radius:50%;background:#080910a8;color:white;font-size:10px;box-shadow:0 0 16px #ff315a66}
+.scene-ads .scene-object{border-radius:8px 25px 8px 25px;background:linear-gradient(135deg,#f9d9a2,#a95b32 48%,#2a1016);box-shadow:0 0 30px #f4a05b66;transform:perspective(250px) rotateY(-22deg) rotateZ(-5deg)}
+.scene-ads .scene-orb{background:radial-gradient(circle at 35% 30%,#fff,#ffe3a6 15%,#d98736 50%,#4b1d20);box-shadow:0 0 35px #ffbf6c99}
+.scene-cinema{background:linear-gradient(150deg,#090b16,#24101e 55%,#08090f)}
+.scene-cinema .scene-object{left:35%;top:23%;width:30%;height:58%;border-radius:45% 45% 8px 8px;background:linear-gradient(90deg,#171a2c,#8a2543 48%,#121321);box-shadow:0 0 40px #f52e5b66}
+.scene-cinema .scene-orb{left:12%;top:13%;width:46px;height:46px;background:radial-gradient(circle,#fff,#ff9a73 20%,#c3224a 65%,transparent);filter:blur(.3px)}
+.scene-social{background:linear-gradient(135deg,#1a1030,#30142b 50%,#090a14)}
+.scene-social .scene-object{left:39%;top:12%;width:23%;height:77%;border-radius:17px;border:3px solid #f9d8ff;background:linear-gradient(180deg,#f34a80,#5a2b94 45%,#10132b);box-shadow:0 0 30px #d73dff77;transform:rotate(7deg);animation:sceneFloat 3.5s ease-in-out infinite}
+.scene-social .scene-object-two{left:23%;top:32%;width:18%;height:42%;opacity:.7;transform:rotate(-12deg);animation-delay:-1.2s}
+.scene-social .scene-orb{left:67%;top:18%;width:24px;height:24px;background:#ffb4df;box-shadow:0 0 22px #ff75cc;animation:sceneFloat 2s ease-in-out infinite}
+.scene-photo{background:linear-gradient(135deg,#172d35,#4d756d 55%,#10191c)}
+.scene-photo .scene-object{left:24%;top:13%;width:52%;height:70%;border-radius:50% 50% 12px 12px;background:radial-gradient(ellipse at 50% 28%,#f3c6a6 0 13%,#533b43 14% 28%,transparent 29%),linear-gradient(135deg,#b7d2c3,#315b59 60%,#182b33);transform:none;box-shadow:0 0 35px #9de6ce44}
+.scene-photo .scene-object-two{left:10%;top:65%;width:80%;height:2px;border:0;background:#d9ffe4;transform:none}
+.scene-photo .scene-orb{left:70%;top:12%;width:34px;height:34px;background:#ffe4a0;box-shadow:0 0 25px #ffe4a0;animation:sceneFloat 5s ease-in-out infinite}
+.scene-music{background:radial-gradient(ellipse at 50% 50%,#3b174f,#090a14 70%)}
+.scene-music .scene-object{left:35%;top:26%;width:30%;height:48%;border-radius:50%;border:3px solid #ed8aff;background:radial-gradient(circle,#fff 0 3%,#ed8aff 5%,#6528a0 30%,#17132c 65%);box-shadow:0 0 32px #d85bff88;transform:none;animation:sceneSpin 8s linear infinite}
+.scene-music .scene-object-two{left:43%;top:38%;width:14%;height:24%;border:2px solid #fff;background:#e9aaff66;transform:none;border-radius:50%;animation:scenePulse 1.2s ease-in-out infinite}
+.scene-music .scene-orb{left:15%;top:35%;width:70%;height:2px;border-radius:0;background:#e6a5ff;box-shadow:0 0 14px #df68ff;animation:sceneWave 1.4s ease-in-out infinite}
+.scene-travel{background:linear-gradient(180deg,#152c45,#dd9664 55%,#122b37)}
+.scene-travel .scene-object{left:0;top:38%;width:100%;height:70%;border:0;border-radius:0;background:linear-gradient(145deg,transparent 0 20%,#172f39 21% 43%,transparent 44%),linear-gradient(35deg,#0c252f 0 36%,#315e5b 37% 58%,transparent 59%);transform:none;box-shadow:none}
+.scene-travel .scene-object-two{left:0;top:58%;width:100%;height:45%;border:0;border-radius:0;background:linear-gradient(160deg,transparent 0 35%,#0b202b 36%);transform:none}
+.scene-travel .scene-orb{left:68%;top:13%;width:48px;height:48px;background:radial-gradient(circle,#fff4cf,#f3a65e 55%,#f3a65e00 72%);box-shadow:0 0 35px #ffc078aa}
+@keyframes sceneFloat{0%,100%{translate:0 0}50%{translate:0 -12px}}
+@keyframes scenePan{from{transform:translateX(-3%)}to{transform:translateX(3%)}}
+@keyframes sceneGlow{0%,100%{opacity:.35}50%{opacity:1}}
+@keyframes sceneScan{0%,100%{transform:translateY(-34px);opacity:.35}50%{transform:translateY(0);opacity:1}}
+@keyframes sceneSpin{to{rotate:360deg}}
+@keyframes scenePulse{0%,100%{scale:.8;opacity:.65}50%{scale:1.25;opacity:1}}
+@keyframes sceneWave{0%,100%{transform:scaleX(.55);opacity:.45}50%{transform:scaleX(1);opacity:1}}
+@media(prefers-reduced-motion:reduce){.template-scene *,.template-scene:before,.template-scene:after{animation:none!important}}
