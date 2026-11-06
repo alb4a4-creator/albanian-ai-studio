@@ -26,7 +26,7 @@ export default async function handler(req,res){
   const {text,voiceId,language}=req.body||{};
   if(typeof text!=="string"||!text.trim()||text.length>3000)return json(res,400,{error:"Shkruaj tekst deri në 3.000 karaktere."});
   if(typeof voiceId!=="string"||! /^[a-zA-Z0-9_-]{8,80}$/.test(voiceId))return json(res,400,{error:"Zgjidh një zë të vlefshëm."});
-  const languages=["sq","de","en","it","fr","es","tr","mk"];
+  const languages=["de","en","it","fr","es","tr","mk","bs","bg","hr","sr","nl","pl","pt","ro","sv","da","fi","el","cs","uk","ru"];
   if(!languages.includes(language))return json(res,400,{error:"Gjuha e zgjedhur nuk mbështetet."});
   const r=await fetch("https://api.elevenlabs.io/v1/text-to-speech/"+encodeURIComponent(voiceId)+"?output_format=mp3_44100_128",{
    method:"POST",headers:{"xi-api-key":key,"Content-Type":"application/json","Accept":"audio/mpeg"},
