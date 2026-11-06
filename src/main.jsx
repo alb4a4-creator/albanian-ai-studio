@@ -78,7 +78,7 @@ function App({userId}){
  <button className="nav" onClick={()=>{setTab('settings');setMobile(false)}}><Settings/>Cilësimet</button>
  <button className="nav" onClick={()=>setNotice('Për ndihmë, na kontakto me email.')}><CircleHelp/>Ndihmë dhe mbështetje</button>
  </nav>
- <div className="sidebottom"><div className="promo"><CreditCard/><b>Paketa Pro</b><p>Më shumë mundësi për krijimtarinë tënde</p><button onClick={()=>setNotice('Paketat me pagesë do të aktivizohen pasi të lidhet sistemi i pagesave.')}>Përmirëso paketën</button></div><button className="language-switch" onClick={()=>setLang(lang==='sq'?'de':'sq')}>🇦🇱　Shqip　⌄</button><small className="copyright">© 2026 Albanian AI Studio<br/>Krijo. Imagjino. Frymëzo.</small></div>
+ <div className="sidebottom"><div className="promo"><CreditCard/><b>Paketa Pro</b><p>Më shumë mundësi për krijimtarinë tënde</p><button onClick={()=>setNotice('Paketat me pagesë do të aktivizohen pasi të lidhet sistemi i pagesave.')}>Përmirëso paketën</button></div><button className="language-switch" onClick={()=>setLang('sq')}>🇦🇱　Shqip</button><small className="copyright">© 2026 Albanian AI Studio<br/>Krijo. Imagjino. Frymëzo.</small></div>
  </aside>
  <main className="reference-main"><header className="reference-header"><button className="mobile" onClick={()=>setMobile(!mobile)}><Menu/></button><div className="global-search"><Search/><input placeholder="Kërko projektet..."/></div><button className="notification"><Bell/><i>2</i></button><button className="profile-avatar" onClick={()=>setTab('settings')}>AN</button></header>
  {tab==='dashboard'&&
