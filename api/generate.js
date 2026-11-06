@@ -14,6 +14,7 @@ export default async function handler(req,res) {
   if(req.method!=="POST" && req.method!=="GET") return json(res,405,{error:"Method not allowed"});
   try {
     if(!(await verifyUser(req))) return json(res,401,{error:"Hyr në llogarinë tënde për të krijuar video."});
+    if(req.method==="GET" && req.query?.health==="1") return json(res,200,{provider:"fal.ai · Seedance 2.0 Fast",configured:Boolean(process.env.FAL_KEY)});
     const falKey=process.env.FAL_KEY;
     if(!falKey) return json(res,503,{error:"Mungon FAL_KEY në Vercel. Shto çelësin e fal.ai te Environment Variables."});
     if(req.method==="POST") {
