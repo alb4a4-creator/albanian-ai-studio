@@ -245,3 +245,11 @@ body{background:radial-gradient(ellipse at 76% 0%,#381216 0,transparent 40%),#08
 .reference-hero{height:auto;aspect-ratio:16/9;min-height:0;background:#080808 url('/images/albanian-ai-studio-banner.webp') center/100% 100% no-repeat;border:0;border-radius:14px;box-shadow:0 12px 40px #0008}
 .reference-hero:after,.reference-hero-copy,.hero-camera,.hero-android,.hero-script{display:none!important}
 @media(max-width:650px){.reference-hero{aspect-ratio:16/9;height:auto}}
+
+/* Three-language selector in the top header */
+.reference-header{display:flex;align-items:center}
+.language-picker{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.language-picker button{display:inline-flex;align-items:center;gap:6px;padding:8px 10px;border:1px solid #343747;border-radius:22px;background:#11141e;color:#d9dce5;font-size:12px;font-weight:650;cursor:pointer;white-space:nowrap}
+.language-picker button.selected{border-color:#e52b3d;background:#351218;color:#fff;box-shadow:0 0 0 1px #e52b3d inset}
+@media(max-width:760px){.reference-header{gap:8px;padding:0 5px}.language-picker{gap:3px}.language-picker button{padding:7px 8px;font-size:11px}.language-picker button span{display:none}.global-search{padding:0 10px;gap:7px}}
+@media(max-width:420px){.language-picker button{padding:7px;font-size:13px}.global-search{max-width:100px}}
