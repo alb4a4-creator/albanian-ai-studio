@@ -40,12 +40,12 @@ function App({userId}){
    const {data:{session}}=await supabase.auth.getSession();
    if(!session?.access_token)throw new Error('Hyr përsëri në llogari.');
    const start=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+session.access_token},body:JSON.stringify({prompt,mode,duration,ratio,imageData:mode==='image'?image:''})});
-   const job=await start.json();if(!start.ok)throw new Error(job.error||'Nuk u nis gjenerimi.');
+   const startText=await start.text();let job;try{job=JSON.parse(startText)}catch{throw new Error('Serveri ktheu përgjigje jo-JSON (HTTP '+start.status+'). '+startText.slice(0,220).replace(/<[^>]*>/g,' ').trim())}if(!start.ok)throw new Error(job.error||'Nuk u nis gjenerimi.');
    let result=null;
    for(let attempt=0;attempt<90;attempt++){
     await new Promise(resolve=>setTimeout(resolve,5000));
     const check=await fetch('/api/generate?requestId='+encodeURIComponent(job.requestId)+'&model='+encodeURIComponent(job.model),{headers:{Authorization:'Bearer '+session.access_token}});
-    result=await check.json();if(!check.ok)throw new Error(result.error||'Gabim gjatë kontrollit të videos.');
+    const checkText=await check.text();try{result=JSON.parse(checkText)}catch{throw new Error('Gabim nga serveri gjatë kontrollit (HTTP '+check.status+'). '+checkText.slice(0,180).replace(/<[^>]*>/g,' ').trim())}if(!check.ok)throw new Error(result.error||'Gabim gjatë kontrollit të videos.');
     if(result.status==='COMPLETED')break;
     if(result.status==='FAILED')throw new Error(result.error||'Gjenerimi dështoi.');
     setNotice((lang==='sq'?'Videoja po krijohet… ':'Video wird erstellt… ')+Math.min(99,Math.round((attempt+1)/90*100))+'%');
