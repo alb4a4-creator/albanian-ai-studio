@@ -427,3 +427,35 @@ body{background:radial-gradient(ellipse at 76% 0%,#381216 0,transparent 40%),#08
 @keyframes cameraFlash{0%,40%,100%{filter:brightness(1);box-shadow:none}48%,54%{filter:brightness(2.8);box-shadow:0 0 18px #fff}}
 @keyframes photoMemory{0%,35%,100%{opacity:0;transform:translate(10px,8px) rotate(12deg) scale(.65)}48%,80%{opacity:1;transform:translate(0,0) rotate(7deg) scale(1)}}
 @keyframes shoreFoam{0%,100%{transform:translateX(-5%) scaleX(.9);opacity:.35}50%{transform:translateX(5%) scaleX(1.1);opacity:.8}}
+
+
+/* Clear before -> after story panels for the three travel templates */
+.scene-before,.scene-after{display:none}
+.scene-variant-15 .scene-before,.scene-variant-15 .scene-after,
+.scene-variant-16 .scene-before,.scene-variant-16 .scene-after,
+.scene-variant-17 .scene-before,.scene-variant-17 .scene-after{display:block;position:absolute;inset:0;overflow:hidden;z-index:2}
+.scene-before{right:50%;background:linear-gradient(180deg,#a9b9c2 0%,#d9d0bd 55%,#6b746f 56%,#343d3d 100%);border-right:1px solid #ffffffaa}
+.scene-before:before{content:"";position:absolute;left:43%;bottom:19%;width:16px;height:42px;border-radius:12px 12px 4px 4px;background:linear-gradient(90deg,#26303a,#52616b,#26303a);box-shadow:0 -13px 0 -4px #343d45}
+.scene-before:after{content:"";position:absolute;left:0;right:0;bottom:16%;height:2px;background:#ffffff66}
+.scene-before span,.scene-after span{position:absolute;top:10px;left:10px;padding:4px 7px;border-radius:5px;background:#101522bb;color:#fff;font-size:9px;font-weight:800;letter-spacing:1.3px}
+.scene-after{left:50%;background:linear-gradient(180deg,#f7b98e 0%,#f9d4a2 38%,#42a6b6 39%,#12647b 100%);border-left:1px solid #fff}
+.scene-after:before{content:"";position:absolute;left:0;right:0;bottom:18%;height:22%;background:repeating-linear-gradient(174deg,#e8ffff 0 2px,#4eb9c8 3px 8px,#16728d 9px 15px);animation:afterSea 3s ease-in-out infinite}
+.scene-after:after{content:"";position:absolute;left:45%;bottom:18%;width:14px;height:40px;border-radius:12px 12px 4px 4px;background:linear-gradient(90deg,#172b36,#455b60,#172b36);box-shadow:0 -13px 0 -4px #303d42,0 0 14px #ffe4c488}
+.scene-after span{left:auto;right:10px;background:#153b48cc}
+.scene-variant-15 .scene-before{background:linear-gradient(180deg,#b8c4cd,#dce0d8 60%,#747b78 61%,#50595a)}
+.scene-variant-15 .scene-after{background:linear-gradient(180deg,#050a1c,#172647 62%,#253d5c 63%,#080e1b)}
+.scene-variant-15 .scene-after:before{height:42%;bottom:0;background:linear-gradient(160deg,transparent 0 35%,#18253c 36% 58%,transparent 59%),linear-gradient(20deg,#080e1b 0 42%,#2b3c5d 43% 62%,transparent 63%)}
+.scene-variant-15 .scene-after:after{background:#101a2e;box-shadow:0 -13px 0 -4px #101a2e,0 0 18px #a5c5ff55}
+.scene-variant-16 .scene-before{background:linear-gradient(180deg,#b5d3df,#f4d4b1 58%,#7c8c8a 59%,#53646a)}
+.scene-variant-16 .scene-before:before{left:10%;bottom:18%;width:80%;height:43%;border-radius:4px;background:repeating-linear-gradient(90deg,#a3b4b7 0 18px,#82999e 19px 34px);box-shadow:inset 0 12px #d7e3e0}
+.scene-variant-16 .scene-after{background:linear-gradient(180deg,#080f27,#17284a 65%,#101a2b 66%,#090e19)}
+.scene-variant-16 .scene-after:before{height:54%;bottom:0;background:repeating-linear-gradient(90deg,transparent 0 9px,#f5cf7b 10px 12px,transparent 13px 20px),linear-gradient(90deg,#111c33 0 18%,transparent 18% 23%,#243653 23% 60%,transparent 60% 65%,#111c33 65%)}
+.scene-variant-16 .scene-after:after{left:10%;bottom:20%;width:32px;height:10px;border-radius:8px;background:#e87969;box-shadow:0 0 12px #ff887c}
+.scene-variant-17 .scene-before{background:linear-gradient(180deg,#c5d5d7 0%,#e7d4c0 56%,#8d9a91 57%,#69766e 100%)}
+.scene-variant-17 .scene-before:before{left:44%;bottom:17%;width:18px;height:43px;background:linear-gradient(90deg,#39434a,#69747a,#39434a);box-shadow:0 -14px 0 -4px #4b555b}
+.scene-variant-17 .scene-after{background:linear-gradient(180deg,#79c2dc 0%,#ffd19f 43%,#4eb2c3 44%,#0b6079 100%)}
+.scene-variant-17 .scene-after:before{height:30%;bottom:0;background:repeating-linear-gradient(174deg,#e4ffff 0 2px,#65c8d1 3px 8px,#16738b 9px 15px);animation:afterSea 2.5s ease-in-out infinite}
+.scene-variant-17 .scene-after:after{left:40%;bottom:18%;width:13px;height:38px;background:linear-gradient(90deg,#1b3039,#4b5a5d,#1b3039);box-shadow:0 -13px 0 -4px #34444a}
+.scene-variant-15 .scene-caption,.scene-variant-16 .scene-caption,.scene-variant-17 .scene-caption{z-index:5;text-shadow:0 2px 8px #000}
+.scene-variant-15 .scene-play,.scene-variant-16 .scene-play,.scene-variant-17 .scene-play{z-index:6}
+@keyframes afterSea{0%,100%{transform:translateX(-3%) skewY(-1deg)}50%{transform:translateX(3%) skewY(1deg)}}
