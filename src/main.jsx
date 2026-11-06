@@ -48,6 +48,27 @@ const ideas=[
 {category:'travel',title:'Qytet futurist natën',titleEn:'Futuristic city at night',titleDe:'Futuristische Stadt bei Nacht',desc:'Qytet me neon, shi dhe atmosferë sci-fi.',style:'three',mode:'text',prompt:'Një qytet futurist natën, arkitekturë moderne, neon, shi mbi asfalt, kamera lëviz ngadalë mes ndërtesave, 3D realist.'},
 {category:'travel',title:'Pushime buzë detit',titleEn:'Seaside holiday',titleDe:'Urlaub am Meer',desc:'Pamje relaksuese dhe ngjyra verore.',style:'cinema',mode:'text',prompt:'Video udhëtimi buzë detit, ujë i kaltër kristal, valë të buta, palma që lëkunden, pamje droni dhe dritë e ngrohtë verore.'}
 ];
+const branchPreviewSets=[
+{source:'1500648767791-00dcc994a43e',outs:['1501386761578-eac5c94b800a','1524368535928-5b5e00ddc76b','1470229722913-7c0e2dbbafd3']},
+{source:'1555396273-367ea4eb4db5',outs:['1517248135467-4c7edcad34c4','1414235077428-338989a2e8c0','1547592180-85f173990554']},
+{source:'1497366754035-f200968a6e72',outs:['1497366216548-37526070297c','1497366811353-6870744d04b2','1497366754035-f200968a6e72']},
+{source:'1506794778202-cad84cf45f1d',outs:['1500530855697-b586d89ba3ee','1501785888041-af3ef285b470','1470770841072-f978cf4d019e']},
+{source:'1534528741775-53994a69daeb',outs:['photo-1464822759023-fed622ff2c3b','photo-1470770841072-f978cf4d019e','photo-1500534623283-312aade485b7']},
+{source:'1507003211169-0a1dd7228f2d',outs:['photo-1519608487953-e999c86e7455','photo-1500530855697-b586d89ba3ee','photo-1518837695005-2083093ee35b']},
+{source:'1524504388940-b1c1722653e1',outs:['photo-1492684223066-81342ee5ff30','photo-1501386761578-eac5c94b800a','photo-1506157786151-b8491531f063']},
+{source:'1517841905240-472988babdf9',outs:['photo-1493225457124-a3eb161ffa5f','photo-1516280440614-37939bbacd81','photo-1508700115892-45ecd05ae2ad']},
+{source:'1501196354995-cbb51c65aaea',outs:['photo-1492684223066-81342ee5ff30','photo-1506157786151-b8491531f063','photo-1470229722913-7c0e2dbbafd3']},
+{source:'1519085360753-af0119f7cbe7',outs:['photo-1497366754035-f200968a6e72','photo-1497366216548-37526070297c','photo-1524758631624-e2822e304c36']},
+{source:'1512316609839-ce289d3eba0a',outs:['photo-1517248135467-4c7edcad34c4','photo-1555396273-367ea4eb4db5','photo-1514933651103-005eec06c04b']},
+{source:'1500648767791-00dcc994a43e',outs:['photo-1500530855697-b586d89ba3ee','photo-1470770841072-f978cf4d019e','photo-1501785888041-af3ef285b470']},
+{source:'1516280440614-37939bbacd81',outs:['photo-1501386761578-eac5c94b800a','photo-1524368535928-5b5e00ddc76b','photo-1470229722913-7c0e2dbbafd3']},
+{source:'1508700115892-45ecd05ae2ad',outs:['photo-1493225457124-a3eb161ffa5f','photo-1506157786151-b8491531f063','photo-1501386761578-eac5c94b800a']},
+{source:'1500530855697-b586d89ba3ee',outs:['photo-1501785888041-af3ef285b470','photo-1470770841072-f978cf4d019e','photo-1464822759023-fed622ff2c3b']},
+{source:'1470770841072-f978cf4d019e',outs:['photo-1500534623283-312aade485b7','photo-1501785888041-af3ef285b470','photo-1518837695005-2083093ee35b']},
+{source:'1501785888041-af3ef285b470',outs:['photo-1518837695005-2083093ee35b','photo-1500530855697-b586d89ba3ee','photo-1470770841072-f978cf4d019e']},
+{source:'1506157786151-b8491531f063',outs:['photo-1501386761578-eac5c94b800a','photo-1524368535928-5b5e00ddc76b','photo-1470229722913-7c0e2dbbafd3']}
+];
+const branchPhoto=(id)=>'https://images.unsplash.com/'+(id.startsWith('photo-')?id:'photo-'+id)+'?auto=format&fit=crop&w=520&q=78';
 function App({userId}){
  const [lang,setLangState]=useState(()=>{try{return ['sq','en','de'].includes(localStorage.getItem('aais-language'))?localStorage.getItem('aais-language'):'sq'}catch{return 'sq'}}),[tab,setTab]=useState('dashboard'),[templateCategory,setTemplateCategory]=useState('all'),[mode,setMode]=useState('text'),[prompt,setPrompt]=useState(''),[ratio,setRatio]=useState('16:9'),[duration,setDuration]=useState('5'),[style,setStyle]=useState('real'),[image,setImage]=useState(''),[imageName,setImageName]=useState(''),[projects,setProjects]=useState(()=>{try{const value=JSON.parse(localStorage.getItem('aais-projects')||'[]');return Array.isArray(value)?value.filter(p=>p&&typeof p.id==='number'&&typeof p.prompt==='string'):[]}catch{return []}}),[notice,setNotice]=useState(''),[voiceNotice,setVoiceNotice]=useState(''),[voiceText,setVoiceText]=useState(''),[voiceLang,setVoiceLang]=useState('sq'),[voiceGender,setVoiceGender]=useState('female'),[voiceList,setVoiceList]=useState([]),[voiceId,setVoiceId]=useState(''),[voiceBusy,setVoiceBusy]=useState(false),[voiceAudio,setVoiceAudio]=useState(''),[mobile,setMobile]=useState(false),[editingId,setEditingId]=useState(null),[generating,setGenerating]=useState(false),[videoUrl,setVideoUrl]=useState('');
  const setLang=(next)=>{setLangState(next);try{localStorage.setItem('aais-language',next)}catch{}};
