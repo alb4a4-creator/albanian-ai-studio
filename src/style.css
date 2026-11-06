@@ -159,3 +159,19 @@ body{background:#080a11;color:#f7f7fb}
 
 /* Free Albanian TTS demo launch panel */
 .voice-free-head{display:flex;align-items:center;gap:13px;margin-bottom:22px}.voice-free-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:13px;background:#251d36;color:#f06b8a}.voice-free-head b{display:block;color:#fff;font-size:15px}.voice-free-head small{display:block;color:#9ca3b5;font-size:11px;margin-top:4px}.voice-free-tag{margin-left:auto;padding:6px 9px;border:1px solid #315b48;border-radius:30px;background:#10251c;color:#8ce0ac;font-size:9px;font-weight:800;white-space:nowrap}.voice-feature-list{display:grid;gap:13px;margin:0 0 22px}.voice-feature-list>div{display:flex;align-items:center;gap:10px;color:#d4d8e3;font-size:13px}.voice-feature-list svg{flex:none;color:#75d69a}.voice-launch{display:flex;align-items:center;justify-content:center;gap:9px;min-height:50px;width:100%;text-decoration:none;text-align:center}.voice-generator-card .hint{color:#929aab;font-size:11px;line-height:1.65;margin:16px 0 0}.voice-generator-card .hint+.hint{margin-top:9px}@media(max-width:520px){.voice-free-head{align-items:flex-start;flex-wrap:wrap}.voice-free-tag{margin-left:0}}
+
+
+.voice-creator-page .voice-generator-card{max-width:760px;margin-top:24px}
+.voice-creator-controls{display:flex;flex-direction:column;gap:8px;margin:18px 0}
+.voice-creator-controls select{max-width:240px}
+.voice-talk-area{display:grid;place-items:center;padding:26px 0}
+.voice-talk-button{width:168px;height:168px;border-radius:50%;border:1px solid #793447;background:radial-gradient(circle,#3c1422,#17111b 72%);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;box-shadow:0 0 0 10px #e5092c12,0 0 40px #e5092c22;cursor:pointer}
+.voice-talk-button svg{color:#ff405a}
+.voice-talk-button b{font-size:13px}
+.voice-talk-button small{font-size:10px;color:#b7aab3}
+.voice-talk-button.is-listening{background:radial-gradient(circle,#7d1730,#21101a 72%);animation:voicePulse 1.4s infinite}
+.voice-creator-text{box-sizing:border-box;width:100%;min-height:120px;margin:10px 0 16px;padding:14px;background:#0b0d15;border:1px solid #343448;border-radius:10px;color:#fff;font:inherit;resize:vertical}
+.voice-creator-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.voice-creator-actions .generate{margin-top:0}
+@keyframes voicePulse{50%{box-shadow:0 0 0 18px #e5092c20,0 0 55px #e5092c66}}
+@media(max-width:600px){.voice-talk-button{width:148px;height:148px}.voice-creator-actions>*{width:100%;justify-content:center}}
