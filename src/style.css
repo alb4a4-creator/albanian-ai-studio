@@ -621,3 +621,8 @@ body{background:radial-gradient(ellipse at 76% 0%,#381216 0,transparent 40%),#08
 .poster-disclaimer{margin:0;padding:0 16px 13px;text-align:center;color:#9295a3;font-size:10px}
 .poster-panel:hover img{transform:scale(1.045)}
 @media(max-width:650px){.poster-demo-top{align-items:flex-start;flex-direction:column;padding:15px}.poster-promise{align-self:stretch}.poster-panels{grid-template-columns:repeat(4,minmax(120px,1fr));gap:7px;overflow-x:auto;padding:12px}.poster-arrow{display:none}.poster-panel{height:190px}.poster-panel-label{font-size:9px;padding:6px 3px}.poster-categories{gap:9px 0}.poster-categories span{font-size:9px;padding:0 8px}.poster-bottom>button{min-width:100%;padding:12px 10px}}
+
+/* Scene backdrops behind the same identity reference portrait */
+.poster-singer{background-image:linear-gradient(135deg,rgba(5,25,70,.12),rgba(3,10,30,.35)),url("https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=650&q=80");background-size:cover;background-position:center}
+.poster-crowd{background-image:linear-gradient(135deg,rgba(50,5,28,.12),rgba(10,5,20,.35)),url("https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=650&q=80");background-size:cover;background-position:center}
+.poster-band{background-image:linear-gradient(135deg,rgba(15,10,50,.1),rgba(4,8,25,.35)),url("https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=650&q=80");background-size:cover;background-position:center}
