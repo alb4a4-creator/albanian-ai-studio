@@ -385,3 +385,45 @@ body{background:radial-gradient(ellipse at 76% 0%,#381216 0,transparent 40%),#08
 @keyframes citySlide{0%,100%{transform:translateX(-4%)}50%{transform:translateX(4%)}}
 @keyframes seaWaves{0%,100%{transform:translateY(4px) skewY(-2deg)}50%{transform:translateY(-4px) skewY(2deg)}}
 @media(prefers-reduced-motion:reduce){.template-scene *,.template-scene:before,.template-scene:after{animation:none!important}}
+
+
+/* Travel stories: a traveler walking into the night, a living city, and a beach memory */
+.scene-person,.scene-camera,.scene-car,.scene-photo-frame{position:absolute;display:none;z-index:4;pointer-events:none}
+.scene-variant-15{background:radial-gradient(ellipse at 50% 78%,#253a59 0,transparent 43%),linear-gradient(180deg,#050916 0%,#111c35 52%,#070b17 100%)}
+.scene-variant-15:after{background:radial-gradient(ellipse at 50% 90%,#647fb855,transparent 56%),radial-gradient(circle at 20% 18%,#d8e7ff 0 1px,transparent 2px),radial-gradient(circle at 76% 14%,#d8e7ff 0 1px,transparent 2px),radial-gradient(circle at 38% 28%,#d8e7ff 0 1px,transparent 2px)}
+.scene-variant-15 .scene-object{top:54%;height:48%;background:linear-gradient(155deg,transparent 0 27%,#111c30 28% 48%,transparent 49%),linear-gradient(25deg,#070d1b 0 43%,#1d2c49 44% 60%,transparent 61%);filter:drop-shadow(0 -5px 12px #45628b55)}
+.scene-variant-15 .scene-object-two{left:46%;top:57%;width:8%;height:43%;border:0;border-radius:50% 50% 0 0;background:linear-gradient(90deg,#141d32,#52617c,#141d32);clip-path:polygon(50% 0,100% 100%,0 100%);opacity:.45}
+.scene-variant-15 .scene-orb{left:75%;top:13%;width:36px;height:36px;background:radial-gradient(circle,#f2f3ff,#a7bce9 55%,transparent 75%);box-shadow:0 0 35px #a6bfff99}
+.scene-variant-15 .scene-person{display:block;left:49%;bottom:12%;width:11px;height:32px;border-radius:7px 7px 3px 3px;background:linear-gradient(90deg,#090d18,#303a50 55%,#090d18);box-shadow:0 0 13px #9db9ff66;animation:nightWalker 2.2s ease-in-out infinite}
+.scene-variant-15 .scene-person:before{content:"";position:absolute;left:2px;top:-10px;width:8px;height:8px;border-radius:50%;background:#101522;box-shadow:0 0 7px #b9caff55}
+.scene-variant-15 .scene-person:after{content:"";position:absolute;left:1px;bottom:-8px;width:4px;height:13px;background:#111827;box-shadow:6px 0 #111827;transform-origin:top;animation:walkerLegs .55s ease-in-out infinite alternate}
+.scene-variant-15 .scene-line{top:82%;left:30%;right:30%;height:1px;background:#9cbaff88;box-shadow:0 0 16px #8baeff}
+.scene-variant-15 .scene-caption{color:#dbe5ff;letter-spacing:2px}
+.scene-variant-16{background:linear-gradient(180deg,#080d20 0%,#172443 65%,#0b111d 100%)}
+.scene-variant-16 .scene-object{left:0;top:22%;width:100%;height:80%;border:0;border-radius:0;background:linear-gradient(90deg,transparent 0 4%,#17243d 4% 18%,transparent 18% 22%,#263756 22% 39%,transparent 39% 44%,#17243d 44% 62%,transparent 62% 67%,#263756 67% 85%,transparent 85%),linear-gradient(0deg,#0b1324 0 18%,transparent 19%);animation:citySlide 12s ease-in-out infinite}
+.scene-variant-16 .scene-object:before{content:"";position:absolute;inset:10% 8% 25%;background:repeating-linear-gradient(90deg,transparent 0 9px,#f6cf7a 10px 12px,transparent 13px 20px);opacity:.75}
+.scene-variant-16 .scene-object-two{left:0;top:79%;width:100%;height:2px;border:0;background:#a4d8ff;box-shadow:0 0 16px #76cfff;animation:none}
+.scene-variant-16 .scene-orb{left:78%;top:10%;width:25px;height:25px;background:#e5e8ff;box-shadow:0 0 25px #a9c8ff}
+.scene-variant-16 .scene-car{display:block;left:-15%;bottom:17%;width:40px;height:12px;border-radius:8px 12px 4px 4px;background:linear-gradient(#ff8c75,#8d3444);box-shadow:0 0 18px #ff6d66;animation:cityCar 5.5s linear infinite}
+.scene-variant-16 .scene-car:before{content:"";position:absolute;left:8px;top:-5px;width:23px;height:7px;border-radius:8px 8px 0 0;background:#b7dfff}
+.scene-variant-16 .scene-car:after{content:"";position:absolute;left:5px;bottom:-3px;width:7px;height:7px;border-radius:50%;background:#080b13;box-shadow:24px 0 #080b13}
+.scene-variant-16 .scene-caption{color:#d9eaff}
+.scene-variant-17{background:linear-gradient(180deg,#73b7d2 0%,#ffd0a0 48%,#287b91 49%,#0c536d 100%)}
+.scene-variant-17:after{background:radial-gradient(ellipse at 50% 65%,#fff1c655,transparent 55%)}
+.scene-variant-17 .scene-orb{left:72%;top:12%;width:43px;height:43px;background:radial-gradient(circle,#fff6d4,#ffb968 60%,transparent 75%);box-shadow:0 0 35px #ffcb8b}
+.scene-variant-17 .scene-object{top:53%;height:58%;background:repeating-linear-gradient(174deg,#167f9a 0 9px,#4eb5c6 10px 15px,#176a87 16px 24px);animation:seaWaves 3s ease-in-out infinite}
+.scene-variant-17 .scene-object-two{left:0;top:43%;width:100%;height:15%;border:0;border-radius:50%;background:linear-gradient(180deg,#f8e1bc88,transparent);filter:blur(5px);animation:shoreFoam 4s ease-in-out infinite}
+.scene-variant-17 .scene-person{display:block;left:25%;bottom:11%;width:10px;height:30px;border-radius:7px 7px 2px 2px;background:linear-gradient(90deg,#172331,#344452,#172331);animation:beachPhotographer 3.8s ease-in-out infinite}
+.scene-variant-17 .scene-person:before{content:"";position:absolute;left:1px;top:-9px;width:8px;height:8px;border-radius:50%;background:#26303a}
+.scene-variant-17 .scene-person:after{content:"";position:absolute;right:-8px;top:7px;width:12px;height:6px;border-radius:2px;background:#17212b;box-shadow:4px 2px 0 -1px #e9e3d4}
+.scene-variant-17 .scene-camera{display:block;left:31%;bottom:27%;width:13px;height:9px;border:2px solid #1c2631;border-radius:3px;background:#b7d8e1;animation:cameraFlash 3.8s infinite}
+.scene-variant-17 .scene-photo-frame{display:block;right:12%;top:17%;width:48px;height:38px;border:3px solid #fff8e9;border-radius:4px;background:linear-gradient(180deg,#ffcf9a 0 42%,#54a9b4 43% 60%,#17677b 61%);box-shadow:0 5px 20px #183c5366;transform:rotate(7deg);animation:photoMemory 3.8s ease-in-out infinite}
+.scene-variant-17 .scene-photo-frame:after{content:"";position:absolute;inset:4px;border:1px solid #ffffff88}
+.scene-variant-17 .scene-caption{color:#fff}
+@keyframes nightWalker{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(5px,-2px) scale(1.04)}}
+@keyframes walkerLegs{from{transform:skewX(18deg)}to{transform:skewX(-18deg)}}
+@keyframes cityCar{0%{transform:translateX(0)}100%{transform:translateX(390%)}}
+@keyframes beachPhotographer{0%,35%,100%{transform:translateY(0) rotate(0)}45%,65%{transform:translateY(-2px) rotate(-5deg)}}
+@keyframes cameraFlash{0%,40%,100%{filter:brightness(1);box-shadow:none}48%,54%{filter:brightness(2.8);box-shadow:0 0 18px #fff}}
+@keyframes photoMemory{0%,35%,100%{opacity:0;transform:translate(10px,8px) rotate(12deg) scale(.65)}48%,80%{opacity:1;transform:translate(0,0) rotate(7deg) scale(1)}}
+@keyframes shoreFoam{0%,100%{transform:translateX(-5%) scaleX(.9);opacity:.35}50%{transform:translateX(5%) scaleX(1.1);opacity:.8}}
