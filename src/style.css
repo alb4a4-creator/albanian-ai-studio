@@ -175,3 +175,23 @@ body{background:#080a11;color:#f7f7fb}
 .voice-creator-actions .generate{margin-top:0}
 @keyframes voicePulse{50%{box-shadow:0 0 0 18px #e5092c20,0 0 55px #e5092c66}}
 @media(max-width:600px){.voice-talk-button{width:148px;height:148px}.voice-creator-actions>*{width:100%;justify-content:center}}
+
+
+/* Albanian AI Studio — red/black visual identity */
+:root{--purple:#ef3340;--muted:#a1a1aa;--line:#292929}
+body{background:radial-gradient(ellipse at 76% 0%,#381216 0,transparent 40%),#080808}
+.side{background:#0b0b0b;border-color:#292929}
+.logo>span{background:linear-gradient(140deg,#ff3947,#a90e1a);box-shadow:0 7px 24px #e21b2d44}
+.logo small{color:#ff6872}
+.nav.active{background:#321216;color:#ff9ba2}
+.promo{background:linear-gradient(145deg,#271014,#151010);border-color:#64232b}
+.promo svg,.hero label,.other label,.projecthead button{color:#ff6b75}
+.hero h1 em{background:linear-gradient(90deg,#ff626d,#f4d6d8);background-clip:text;color:transparent}
+.orb{background:radial-gradient(circle,#a91d2a,#351015 65%,transparent 70%);color:#ffe1e3;box-shadow:0 0 38px #d51e3033}
+.panel{background:linear-gradient(145deg,#171313,#101010);border-color:#382326}
+.tabs button.chosen{background:#39151a;color:#ffb5bb}
+.generate{background:linear-gradient(100deg,#f04450,#b81322);box-shadow:0 7px 22px #c21d2d44}
+.upload{border-color:#74313a;color:#ff858d}
+.lang,.copy{color:#ffb1b7;border-color:#4b2429;background:#1b1012}
+.reference-promo{border-color:#55232a}
+@media(max-width:650px){.hero h1{letter-spacing:-1.2px}}
