@@ -626,3 +626,18 @@ body{background:radial-gradient(ellipse at 76% 0%,#381216 0,transparent 40%),#08
 .poster-singer{background-image:linear-gradient(135deg,rgba(5,25,70,.12),rgba(3,10,30,.35)),url("https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=650&q=80");background-size:cover;background-position:center}
 .poster-crowd{background-image:linear-gradient(135deg,rgba(50,5,28,.12),rgba(10,5,20,.35)),url("https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=650&q=80");background-size:cover;background-position:center}
 .poster-band{background-image:linear-gradient(135deg,rgba(15,10,50,.1),rgba(4,8,25,.35)),url("https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=650&q=80");background-size:cover;background-position:center}
+
+/* Keep the approved poster design; add the subtle mouse-hover motion */
+@media (hover:hover) and (pointer:fine){
+ .branch-poster-demo .poster-panel{transition:transform .42s cubic-bezier(.2,.8,.2,1),box-shadow .42s ease,border-color .42s ease;transform:translateY(0) scale(1);will-change:transform}
+ .branch-poster-demo .poster-panel img{transition:transform .65s cubic-bezier(.2,.8,.2,1),filter .65s ease}
+ .branch-poster-demo .poster-panel:hover{transform:translateY(-10px) scale(1.035);z-index:4;border-color:#fff;box-shadow:0 16px 36px rgba(255,28,65,.26),0 0 20px rgba(55,145,255,.2)}
+ .branch-poster-demo .poster-panel:hover img{transform:scale(1.09);filter:saturate(1.22) brightness(1.08)}
+ .branch-poster-demo .poster-arrow{transition:transform .35s ease,text-shadow .35s ease}
+ .branch-poster-demo:hover .poster-arrow{transform:translateX(3px);text-shadow:0 0 18px rgba(255,31,66,.95)}
+ .branch-poster-demo .poster-bottom>button{transition:transform .3s ease,box-shadow .3s ease,filter .3s ease}
+ .branch-poster-demo .poster-bottom>button:hover{transform:translateY(-4px) scale(1.025);box-shadow:0 14px 32px rgba(230,0,34,.42);filter:brightness(1.1)}
+}
+@media(prefers-reduced-motion:reduce){
+ .branch-poster-demo .poster-panel,.branch-poster-demo .poster-panel img,.branch-poster-demo .poster-arrow,.branch-poster-demo .poster-bottom>button{transition:none!important}
+}
