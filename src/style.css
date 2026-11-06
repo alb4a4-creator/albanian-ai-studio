@@ -459,3 +459,65 @@ body{background:radial-gradient(ellipse at 76% 0%,#381216 0,transparent 40%),#08
 .scene-variant-15 .scene-caption,.scene-variant-16 .scene-caption,.scene-variant-17 .scene-caption{z-index:5;text-shadow:0 2px 8px #000}
 .scene-variant-15 .scene-play,.scene-variant-16 .scene-play,.scene-variant-17 .scene-play{z-index:6}
 @keyframes afterSea{0%,100%{transform:translateX(-3%) skewY(-1deg)}50%{transform:translateX(3%) skewY(1deg)}}
+
+
+/* Photographic travel previews: clear original vs cinematic grade */
+.template-library .templateart{position:relative;overflow:hidden}
+.template-library .template-scene{position:absolute;inset:0}
+.template-library .scene-variant-15 .scene-before,
+.template-library .scene-variant-15 .scene-after,
+.template-library .scene-variant-16 .scene-before,
+.template-library .scene-variant-16 .scene-after,
+.template-library .scene-variant-17 .scene-before,
+.template-library .scene-variant-17 .scene-after{
+  display:block;position:absolute;top:0;bottom:0;width:50%;height:100%;
+  overflow:hidden;background-size:cover;background-position:center;
+}
+.template-library .scene-before{left:0;right:auto;width:50%;filter:grayscale(.88) saturate(.55) brightness(.76)}
+.template-library .scene-after{left:50%;right:0;width:50%;filter:saturate(1.22) contrast(1.08) brightness(1.03);border-left:2px solid #fff}
+.template-library .scene-before:before,.template-library .scene-before:after,
+.template-library .scene-after:before,.template-library .scene-after:after{content:none!important;display:none!important}
+.template-library .scene-variant-15 .scene-before,
+.template-library .scene-variant-15 .scene-after{
+ background-image:url("https://images.unsplash.com/photo-1759816671674-b0d233903533?auto=format&fit=crop&w=1000&q=80");
+}
+.template-library .scene-variant-16 .scene-before,
+.template-library .scene-variant-16 .scene-after{
+ background-image:url("https://www.pakutaso.com/shared/img/thumb/AIai_241219A027-SL_TP_V4.jpg");
+}
+.template-library .scene-variant-17 .scene-before,
+.template-library .scene-variant-17 .scene-after{
+ background-image:url("https://images.unsplash.com/photo-1571043281665-9debfed10719?auto=format&fit=crop&w=1000&q=80");
+}
+.template-library .scene-variant-15 .scene-before{background-position:43% center}
+.template-library .scene-variant-15 .scene-after{background-position:58% center}
+.template-library .scene-variant-16 .scene-before{background-position:38% center}
+.template-library .scene-variant-16 .scene-after{background-position:62% center}
+.template-library .scene-variant-17 .scene-before{background-position:38% center}
+.template-library .scene-variant-17 .scene-after{background-position:62% center}
+.template-library .scene-variant-15 .scene-before span,
+.template-library .scene-variant-16 .scene-before span,
+.template-library .scene-variant-17 .scene-before span{font-size:0}
+.template-library .scene-variant-15 .scene-before span:after,
+.template-library .scene-variant-16 .scene-before span:after,
+.template-library .scene-variant-17 .scene-before span:after{content:"PARA";font-size:9px}
+.template-library .scene-variant-15 .scene-after span,
+.template-library .scene-variant-16 .scene-after span,
+.template-library .scene-variant-17 .scene-after span{font-size:0}
+.template-library .scene-variant-15 .scene-after span:after,
+.template-library .scene-variant-16 .scene-after span:after,
+.template-library .scene-variant-17 .scene-after span:after{content:"PAS";font-size:9px}
+.template-library .scene-variant-15 .scene-orb,.template-library .scene-variant-15 .scene-object,
+.template-library .scene-variant-15 .scene-object-two,.template-library .scene-variant-15 .scene-line,
+.template-library .scene-variant-15 .scene-person,.template-library .scene-variant-15 .scene-camera,
+.template-library .scene-variant-15 .scene-car,.template-library .scene-variant-15 .scene-photo-frame,
+.template-library .scene-variant-16 .scene-orb,.template-library .scene-variant-16 .scene-object,
+.template-library .scene-variant-16 .scene-object-two,.template-library .scene-variant-16 .scene-line,
+.template-library .scene-variant-16 .scene-person,.template-library .scene-variant-16 .scene-camera,
+.template-library .scene-variant-16 .scene-car,.template-library .scene-variant-16 .scene-photo-frame,
+.template-library .scene-variant-17 .scene-orb,.template-library .scene-variant-17 .scene-object,
+.template-library .scene-variant-17 .scene-object-two,.template-library .scene-variant-17 .scene-line,
+.template-library .scene-variant-17 .scene-person,.template-library .scene-variant-17 .scene-camera,
+.template-library .scene-variant-17 .scene-car,.template-library .scene-variant-17 .scene-photo-frame{display:none!important}
+.template-library .scene-variant-15 .scene-caption,.template-library .scene-variant-16 .scene-caption,
+.template-library .scene-variant-17 .scene-caption{z-index:5}
