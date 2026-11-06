@@ -8,9 +8,8 @@ async function verifyUser(req) {
   // These are the same public Supabase project settings used by the browser client.
   // Server-side variables take precedence when configured in Vercel.
   const url = (process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || "https://yjoszxczwmhztwzmaqhy.supabase.co").replace(/\\/$/, "");
-  const key = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY ||
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXJhIiwicmVmIjoieWpv c3p4Y3p3bWh6dHd6bWFxaHkiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTc5Mzc5NzU1OSwiZXhwIjoyMTA5MzczNTU5fQ.placeholder";
-  if (!key || key.includes("placeholder")) return { ok: false, reason: "Mungon çelësi publik Supabase në konfigurimin e serverit." };
+  const key = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+  if (!key) return { ok: false, reason: "Mungon VITE_SUPABASE_ANON_KEY në Vercel. Kontrollo Environment Variables dhe bëj Redeploy." };
 
   const response = await fetch(url + "/auth/v1/user", {
     headers: { apikey: key, Authorization: "Bearer " + token }
