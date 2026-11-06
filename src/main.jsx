@@ -1,6 +1,6 @@
 import React,{useEffect,useMemo,useRef,useState} from 'react';
 import {createRoot} from 'react-dom/client';
-import {Sparkles,Film,Image as ImageIcon,FolderOpen,Settings,Plus,Play,Upload,Menu,Bell,Clock3,ArrowUpRight,CheckCircle2,Trash2,Shkarko,Clapperboard,WandSparkles,Languages,MonitorPlay,FileImage,X,Copy,ChevronDown,LoaderCircle,Search,UserRound,CircleHelp,CreditCard,MoreVertical,Pencil,ChevronRight,LayoutGrid,Download as Shkarko} from 'lucide-react';
+import {Sparkles,Film,Image as ImageIcon,FolderOpen,Settings,Plus,Play,Upload,Menu,Bell,Clock3,ArrowUpRight,CheckCircle2,Trash2,Clapperboard,WandSparkles,Languages,MonitorPlay,FileImage,X,Copy,ChevronDown,LoaderCircle,Search,UserRound,CircleHelp,CreditCard,MoreVertical,Pencil,ChevronRight,LayoutGrid,Download as Shkarko} from 'lucide-react';
 import './style.css';
 import { supabase, supabaseConfigured } from './lib/supabase';
 
