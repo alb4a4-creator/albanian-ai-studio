@@ -2,18 +2,28 @@ const TEXT_MODEL = "bytedance/seedance-2.0/fast/text-to-video";
 const IMAGE_MODEL = "bytedance/seedance-2.0/fast/image-to-video";
 const json = (res, status, body) => res.status(status).setHeader("Content-Type","application/json").send(JSON.stringify(body));
 async function verifyUser(req) {
-  const token=(req.headers.authorization||"").replace(/^Bearer\s+/i,"");
-  if(!token) return false;
-  const url=process.env.VITE_SUPABASE_URL;
-  const key=process.env.VITE_SUPABASE_ANON_KEY;
-  if(!url||!key) return false;
-  const r=await fetch(url+"/auth/v1/user",{headers:{apikey:key,Authorization:"Bearer "+token}});
-  return r.ok;
+  const token = (req.headers.authorization || req.headers.Authorization || "").replace(/^Bearer\\s+/i, "").trim();
+  if (!token) return { ok: false, reason: "Mungon token-i i hyrjes. Dil nga llogaria dhe hyr përsëri." };
+
+  // These are the same public Supabase project settings used by the browser client.
+  // Server-side variables take precedence when configured in Vercel.
+  const url = (process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || "https://yjoszxczwmhztwzmaqhy.supabase.co").replace(/\\/$/, "");
+  const key = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY ||
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXJhIiwicmVmIjoieWpv c3p4Y3p3bWh6dHd6bWFxaHkiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTc5Mzc5NzU1OSwiZXhwIjoyMTA5MzczNTU5fQ.placeholder";
+  if (!key || key.includes("placeholder")) return { ok: false, reason: "Mungon çelësi publik Supabase në konfigurimin e serverit." };
+
+  const response = await fetch(url + "/auth/v1/user", {
+    headers: { apikey: key, Authorization: "Bearer " + token }
+  });
+  if (response.ok) return { ok: true };
+  if (response.status === 401 || response.status === 403) return { ok: false, reason: "Sesioni ka skaduar ose nuk i përket projektit Supabase. Dil nga llogaria dhe hyr përsëri." };
+  return { ok: false, reason: "Supabase nuk mundi të verifikojë hyrjen (HTTP " + response.status + ")." };
 }
 export default async function handler(req,res) {
   if(req.method!=="POST" && req.method!=="GET") return json(res,405,{error:"Method not allowed"});
   try {
-    if(!(await verifyUser(req))) return json(res,401,{error:"Hyr në llogarinë tënde për të krijuar video."});
+    const auth = await verifyUser(req);
+    if (!auth.ok) return json(res, 401, { error: auth.reason });
     if(req.method==="GET" && req.query?.health==="1") return json(res,200,{provider:"fal.ai · Seedance 2.0 Fast",configured:Boolean(process.env.FAL_KEY)});
     const falKey=process.env.FAL_KEY;
     if(!falKey) return json(res,503,{error:"Mungon FAL_KEY në Vercel. Shto çelësin e fal.ai te Environment Variables."});
