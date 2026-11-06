@@ -195,3 +195,37 @@ body{background:radial-gradient(ellipse at 76% 0%,#381216 0,transparent 40%),#08
 .lang,.copy{color:#ffb1b7;border-color:#4b2429;background:#1b1012}
 .reference-promo{border-color:#55232a}
 @media(max-width:650px){.hero h1{letter-spacing:-1.2px}}
+
+
+/* Final homepage hero treatment */
+.reference-hero{background:radial-gradient(ellipse at 77% 48%,#51151d 0%,#210b10 32%,transparent 63%),linear-gradient(110deg,#090909 0%,#15090b 58%,#080808 100%);border-color:#522027;box-shadow:inset 0 0 70px #0008}
+.reference-hero:after{background:linear-gradient(90deg,#080808 0%,#080808cc 38%,transparent 74%)}
+.hero-camera{display:none}
+.hero-android{position:absolute;z-index:1;right:12%;top:7%;width:290px;height:270px;filter:drop-shadow(0 0 24px #ff243955)}
+.android-halo{position:absolute;width:235px;height:235px;border:2px solid #f33b4d66;border-radius:50%;right:15px;top:9px;box-shadow:0 0 35px #f32d4433,inset 0 0 30px #f32d4422}
+.android-halo:before,.android-halo:after{content:"";position:absolute;inset:17px;border:1px solid #f8a0a766;border-radius:50%;transform:scaleX(.55)}
+.android-halo:after{transform:scaleY(.55)}
+.android-head{position:absolute;z-index:2;top:42px;left:94px;width:105px;height:93px;border-radius:42% 42% 35% 35%;background:linear-gradient(135deg,#f4f1ee,#8e929b 48%,#30343d);border:3px solid #d5d5d8;box-shadow:inset -12px -8px 18px #111,0 0 18px #fff3}
+.android-head:before{content:"";position:absolute;left:-14px;top:25px;width:18px;height:43px;border:5px solid #c9cbd0;border-radius:12px;background:#171b23;box-shadow:0 0 12px #ff344d}
+.android-head:after{content:"";position:absolute;right:-14px;top:25px;width:18px;height:43px;border:5px solid #c9cbd0;border-radius:12px;background:#171b23;box-shadow:0 0 12px #ff344d}
+.android-head i{position:absolute;top:40px;left:22px;width:15px;height:7px;border-radius:8px;background:#56d9ff;box-shadow:0 0 12px #56d9ff}
+.android-head i:nth-child(2){left:65px}
+.android-head b{position:absolute;bottom:14px;left:43px;width:20px;height:3px;border-radius:5px;background:#4b5059}
+.android-neck{position:absolute;z-index:1;top:128px;left:130px;width:34px;height:24px;background:linear-gradient(90deg,#555b65,#e0e0e0,#555b65)}
+.android-body{position:absolute;z-index:2;top:145px;left:73px;width:150px;height:125px;border-radius:48px 48px 20px 20px;background:linear-gradient(110deg,#555b65,#f2f1ed 45%,#747985 72%,#272c35);border:2px solid #c5c7cb;box-shadow:inset 0 -20px 30px #1118}
+.android-body span{position:absolute;top:24px;left:47px;width:55px;height:39px;border-radius:13px;background:linear-gradient(145deg,#191e27,#566273);border:2px solid #9fa5ae}
+.android-body span+span{top:35px;left:67px;width:17px;height:17px;border-radius:50%;background:#ed3345;border:0;box-shadow:0 0 16px #f23b50}
+.android-arm{position:absolute;z-index:1;top:164px;width:33px;height:98px;border-radius:20px;background:linear-gradient(90deg,#373d47,#d4d4d2,#535965);border:2px solid #aeb1b6}
+.android-arm.left{left:55px;transform:rotate(13deg)}
+.android-arm.right{right:47px;transform:rotate(-13deg)}
+.hero-script{right:3%;top:73%;font-size:clamp(17px,1.8vw,25px);color:#ffb2b8}
+.reference-hero-copy{max-width:590px}
+.reference-hero-copy h1 em{color:#ff3346}
+.reference-tool,.reference-stats{background:linear-gradient(145deg,#191113,#0e0e0f);border-color:#382126}
+.reference-icon.violet{background:#351218;color:#ff6977;box-shadow:0 0 20px #ed364333}
+.reference-action.violet-action{background:linear-gradient(90deg,#f04450,#a90e1a)}
+.reference-drop{border-color:#74313a;color:#ff858d}
+.reference-stats h3 span,.reference-project-head h2 span{color:#ff4b5b}
+.reference-stats>button:not(.quick){background:linear-gradient(90deg,#ef3340,#a90e1a)}
+@media(max-width:800px){.hero-android{right:0;opacity:.8;transform:scale(.82);transform-origin:right center}.hero-script{display:none}.reference-hero-copy{padding:30px 22px}.reference-hero-copy p{max-width:380px}}
+@media(max-width:560px){.hero-android{right:-80px;top:8px;opacity:.38;transform:scale(.75)}.reference-hero-copy{padding:28px 18px}.reference-hero-copy h1{font-size:36px}.reference-hero-copy h2{font-size:24px}.reference-hero-copy p{font-size:13px;max-width:250px}.reference-hero:after{background:linear-gradient(90deg,#080808 0%,#080808d9 60%,#08080855 100%)}}
