@@ -70,7 +70,7 @@ const branchPreviewSets=[
 ];
 const branchPhoto=(id)=>'https://images.unsplash.com/'+(id.startsWith('photo-')?id:'photo-'+id)+'?auto=format&fit=crop&w=520&q=78';
 function App({userId}){
- const [lang,setLangState]=useState(()=>{try{return ['sq','en','de'].includes(localStorage.getItem('aais-language'))?localStorage.getItem('aais-language'):'sq'}catch{return 'sq'}}),[tab,setTab]=useState('dashboard'),[templateCategory,setTemplateCategory]=useState('all'),[mode,setMode]=useState('text'),[prompt,setPrompt]=useState(''),[ratio,setRatio]=useState('16:9'),[duration,setDuration]=useState('5'),[style,setStyle]=useState('real'),[image,setImage]=useState(''),[imageName,setImageName]=useState(''),[projects,setProjects]=useState(()=>{try{const value=JSON.parse(localStorage.getItem('aais-projects')||'[]');return Array.isArray(value)?value.filter(p=>p&&typeof p.id==='number'&&typeof p.prompt==='string'):[]}catch{return []}}),[notice,setNotice]=useState(''),[voiceNotice,setVoiceNotice]=useState(''),[voiceText,setVoiceText]=useState(''),[voiceLang,setVoiceLang]=useState('sq'),[voiceGender,setVoiceGender]=useState('female'),[voiceList,setVoiceList]=useState([]),[voiceId,setVoiceId]=useState(''),[voiceBusy,setVoiceBusy]=useState(false),[voiceAudio,setVoiceAudio]=useState(''),[mobile,setMobile]=useState(false),[editingId,setEditingId]=useState(null),[generating,setGenerating]=useState(false),[videoUrl,setVideoUrl]=useState('');
+ const [lang,setLangState]=useState(()=>{try{return ['sq','en','de'].includes(localStorage.getItem('aais-language'))?localStorage.getItem('aais-language'):'sq'}catch{return 'sq'}}),[tab,setTab]=useState('dashboard'),[templateCategory,setTemplateCategory]=useState('all'),[mode,setMode]=useState('text'),[prompt,setPrompt]=useState(''),[ratio,setRatio]=useState('16:9'),[duration,setDuration]=useState('5'),[style,setStyle]=useState('real'),[image,setImage]=useState(''),[imageName,setImageName]=useState(''),[projects,setProjects]=useState(()=>{try{const value=JSON.parse(localStorage.getItem('aais-projects')||'[]');return Array.isArray(value)?value.filter(p=>p&&typeof p.id==='number'&&typeof p.prompt==='string'):[]}catch{return []}}),[notice,setNotice]=useState(''),[voiceNotice,setVoiceNotice]=useState(''),[voiceText,setVoiceText]=useState(''),[voiceLang,setVoiceLang]=useState('sq'),[voiceGender,setVoiceGender]=useState('female'),[voiceList,setVoiceList]=useState([]),[voiceId,setVoiceId]=useState(''),[voiceBusy,setVoiceBusy]=useState(false),[voiceAudio,setVoiceAudio]=useState(''),[mobile,setMobile]=useState(false),[editingId,setEditingId]=useState(null),[generating,setGenerating]=useState(false),[videoUrl,setVideoUrl]=useState(''),[batchVideos,setBatchVideos]=useState([]);
  const setLang=(next)=>{setLangState(next);try{localStorage.setItem('aais-language',next)}catch{}};
  const fileRef=useRef(null),backupRef=useRef(null),t=copy[lang];
  const [cloudLoaded,setCloudLoaded]=useState(false),[engineReady,setEngineReady]=useState(null);
@@ -93,27 +93,54 @@ function App({userId}){
  async function generateVideo(){
   if(generating)return;
   if(!prompt.trim()){setNotice(lang==='sq'?'Shkruaj përshkrimin e videos.':'Bitte beschreibe dein Video.');return}
-  if(mode==='image'&&!image){setNotice(lang==='sq'?'Ngarko një fotografi për ta animuar.':'Bitte lade ein Bild hoch.');return}
-  setGenerating(true);setVideoUrl('');setNotice(lang==='sq'?'Po dërgohet kërkesa te motori AI…':'Anfrage wird an die KI gesendet…');
+  if(mode==='image'&&!image){setNotice(lang==='sq'?'Ngarko një fotografi për ta transformuar.':'Bitte lade ein Bild hoch.');return}
+  const variants=mode==='image'?[
+   {label:lang==='sq'?'1. Këngëtar kryesor në skenë':'1. Lead singer on stage',suffix:'Transform the exact same person from the uploaded reference photo into the lead singer on a professional concert stage. Preserve the person identity, facial features, age, skin tone, hairstyle and recognizable clothing as closely as possible. The person is now standing confidently at center stage, singing into a microphone, dramatic cinematic spotlights, realistic live concert atmosphere, natural body movement and expressive performance.'},
+   {label:lang==='sq'?'2. Në mes të publikut':'2. In the concert audience',suffix:'Transform the exact same person from the uploaded reference photo into a concert attendee in the middle of a lively audience. Preserve the same identity, face, age, skin tone, hairstyle and recognizable clothing. Show the person enjoying the music, smiling and moving naturally, hands raised among a crowd, stage lights and musicians visible in the background, cinematic realistic live-event footage.'},
+   {label:lang==='sq'?'3. Duke kënduar me grupin':'3. Performing with the band',suffix:'Transform the exact same person from the uploaded reference photo into a performer on stage singing together with a live music band. Preserve the same identity, facial features, age, skin tone, hairstyle and recognizable clothing. The person sings at the front beside guitarists, drummer and bass player, interacting naturally with the band, dynamic camera movement, realistic concert lights and cinematic music-video quality.'}
+  ]:[{label:lang==='sq'?'Videoja':'Video',suffix:''}];
+  if(mode==='image'&&creditBalance<3){setNotice(lang==='sq'?'Për 3 transformimet duhen 3 kredite. Merr kreditet falas ose shto kredite në llogari.':'Three transformations require 3 credits. Claim your free credits or add credits to your account.');return}
+  setGenerating(true);setVideoUrl('');setBatchVideos(variants.map(v=>({...v,status:lang==='sq'?'Në pritje':'Queued',videoUrl:''})));
+  setNotice(mode==='image'?(lang==='sq'?'Po përgatiten 3 transformime nga e njëjta foto. Kërkohen 3 kredite…':'Preparing 3 transformations from the same photo. 3 credits required…'):(lang==='sq'?'Po dërgohet kërkesa te motori AI…':'Anfrage wird an die KI gesendet…'));
   try{
    const {data:{session}}=await supabase.auth.getSession();
    if(!session?.access_token)throw new Error('Hyr përsëri në llogari.');
-   const start=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+session.access_token},body:JSON.stringify({prompt,mode,duration,ratio,imageData:mode==='image'?image:''})});
-   const startText=await start.text();let job;try{job=JSON.parse(startText)}catch{throw new Error('Serveri ktheu përgjigje jo-JSON (HTTP '+start.status+'). '+startText.slice(0,220).replace(/<[^>]*>/g,' ').trim())}if(!start.ok)throw new Error(job.error||'Nuk u nis gjenerimi.');
-   let result=null;
-   for(let attempt=0;attempt<90;attempt++){
-    await new Promise(resolve=>setTimeout(resolve,5000));
-    const check=await fetch('/api/generate?requestId='+encodeURIComponent(job.requestId)+'&model='+encodeURIComponent(job.model),{headers:{Authorization:'Bearer '+session.access_token}});
-    const checkText=await check.text();try{result=JSON.parse(checkText)}catch{throw new Error('Gabim nga serveri gjatë kontrollit (HTTP '+check.status+'). '+checkText.slice(0,180).replace(/<[^>]*>/g,' ').trim())}if(!check.ok)throw new Error(result.error||'Gabim gjatë kontrollit të videos.');
-    if(result.status==='COMPLETED')break;
-    if(result.status==='FAILED')throw new Error(result.error||'Gjenerimi dështoi.');
-    setNotice((lang==='sq'?'Videoja po krijohet… ':'Video wird erstellt… ')+Math.min(99,Math.round((attempt+1)/90*100))+'%');
+   const headers={'Content-Type':'application/json',Authorization:'Bearer '+session.access_token};
+   const jobs=[];
+   for(let i=0;i<variants.length;i++){
+    const variant=variants[i];
+    const fullPrompt=mode==='image'?[prompt.trim(),variant.suffix,'IMPORTANT: This must be the same real person from the input image, not a lookalike or a different person. Keep identity consistent throughout the entire clip.'].join(' '):prompt.trim();
+    const startRes=await fetch('/api/generate',{method:'POST',headers,body:JSON.stringify({prompt:fullPrompt,mode,duration,ratio,imageData:mode==='image'?image:''})});
+    const body=await startRes.text();let job;try{job=JSON.parse(body)}catch{throw new Error('Serveri ktheu përgjigje jo-JSON (HTTP '+startRes.status+'). '+body.slice(0,180).replace(/<[^>]*>/g,' ').trim())}
+    if(!startRes.ok)throw new Error(job.error||'Nuk u nis transformimi '+(i+1)+'.');
+    jobs.push({...job,index:i,label:variant.label,prompt:fullPrompt});
+    setBatchVideos(old=>old.map((v,j)=>j===i?{...v,status:lang==='sq'?'Në proces':'Processing'}:v));
    }
-   if(!result?.videoUrl)throw new Error(lang==='sq'?'Gjenerimi po zgjat më shumë se zakonisht. Provo përsëri pas pak.':'Die Erstellung dauert länger. Bitte später erneut versuchen.');
-   setVideoUrl(result.videoUrl);
-   const p={id:Date.now(),title:prompt.trim().slice(0,52),prompt:prompt.trim(),mode,ratio,duration,style,imageName,imageData:image||'',created:new Date().toLocaleDateString(),status:'Generated',videoUrl:result.videoUrl};
-   setProjects(old=>[p,...old]);setEditingId(p.id);setNotice(lang==='sq'?'Videoja u krijua me sukses! Mund ta shikosh dhe shkarkosh më poshtë.':'Video erfolgreich erstellt! Du kannst sie unten ansehen und herunterladen.');
-  }catch(err){setNotice((lang==='sq'?'Nuk u krijua videoja: ':'Video konnte nicht erstellt werden: ')+(err.message||'Gabim i panjohur.'))}
+   const completed=new Set(),failed=new Set();
+   for(let attempt=0;attempt<90&&completed.size+failed.size<jobs.length;attempt++){
+    await new Promise(resolve=>setTimeout(resolve,5000));
+    await Promise.all(jobs.filter(j=>!completed.has(j.index)&&!failed.has(j.index)).map(async job=>{
+     try{
+      const check=await fetch('/api/generate?requestId='+encodeURIComponent(job.requestId)+'&model='+encodeURIComponent(job.model),{headers:{Authorization:'Bearer '+session.access_token}});
+      const raw=await check.text();let result;try{result=JSON.parse(raw)}catch{throw new Error('Përgjigje jo-JSON nga serveri.')}
+      if(!check.ok)throw new Error(result.error||'Gabim gjatë kontrollit.');
+      if(result.status==='COMPLETED'&&result.videoUrl){
+       completed.add(job.index);
+       setBatchVideos(old=>old.map((v,j)=>j===job.index?{...v,status:lang==='sq'?'Përfundoi':'Completed',videoUrl:result.videoUrl}:v));
+       const p={id:Date.now()+job.index,title:job.label,prompt:job.prompt,mode,ratio,duration,style,imageName,imageData:image||'',created:new Date().toLocaleDateString(),status:'Generated',videoUrl:result.videoUrl};
+       setProjects(old=>[p,...old]);
+       if(!job.index)setVideoUrl(result.videoUrl);
+      }else if(result.status==='FAILED'){failed.add(job.index);setBatchVideos(old=>old.map((v,j)=>j===job.index?{...v,status:lang==='sq'?'Dështoi':'Failed',error:result.error||'Gjenerimi dështoi'}:v))}
+     }catch(error){failed.add(job.index);setBatchVideos(old=>old.map((v,j)=>j===job.index?{...v,status:lang==='sq'?'Dështoi':'Failed',error:error.message}:v))}
+    }));
+    setNotice(lang==='sq'?'Transformimet: '+completed.size+' nga '+jobs.length+' përfunduan.':'Transformations: '+completed.size+' of '+jobs.length+' completed.');
+   }
+   const successes=completed.size;
+   if(successes===jobs.length)setNotice(lang==='sq'?'Të tria videot u krijuan nga e njëjta foto! Shiko rezultatet më poshtë.':'All three videos were created from the same photo! See the results below.');
+   else if(successes>0)setNotice(lang==='sq'?successes+' nga 3 videot u krijuan. Shiko rezultatet dhe provo përsëri për ato që dështuan.':successes+' of 3 videos were created. See results and retry failed ones.');
+   else if(failed.size)setNotice(lang==='sq'?'Asnjë video nuk u krijua. Kontrollo kreditet dhe konfigurimin e motorit AI.':'No videos were created. Check credits and AI engine configuration.');
+   else setNotice(lang==='sq'?'Gjenerimi po zgjat më shumë se zakonisht. Kontrollo projektet pas pak.':'Generation is taking longer than usual. Check projects shortly.');
+  }catch(err){setNotice((lang==='sq'?'Nuk u krijuan transformimet: ':'Could not create transformations: ')+(err.message||'Gabim i panjohur.'))}
   finally{setGenerating(false)}
  }
  function fifty(){return 52}
