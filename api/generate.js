@@ -26,7 +26,10 @@ export default async function handler(req,res) {
     if (!auth.ok) return json(res, 401, { error: auth.reason });
     if(req.method==="GET" && req.query?.health==="1") return json(res,200,{provider:"fal.ai · Seedance 2.0 Fast",configured:Boolean(process.env.FAL_KEY)});
     const falKey=process.env.FAL_KEY;
-    if(!falKey) return json(res,503,{error:"Mungon FAL_KEY në Vercel. Shto çelësin e fal.ai te Environment Variables."});
+    if(!falKey) return json(res,503,{error:"Motori AI nuk është konfiguruar ende."});
+    // Safety gate: never expose an unmetered public generation endpoint.
+    // Enable only after credits, quotas, and customer billing are enforced server-side.
+    if(req.method==="POST" && process.env.GENERATION_BILLING_ENABLED!=="true") return json(res,503,{error:"Gjenerimi i videove do të aktivizohet pasi të vendoset sistemi i krediteve dhe kufijtë e përdorimit."});
     if(req.method==="POST") {
       const {prompt,mode,duration,ratio,imageData}=req.body||{};
       if(typeof prompt!=="string"||prompt.trim().length<3||prompt.length>4000) return json(res,400,{error:"Përshkrimi duhet të ketë 3–4000 karaktere."});
