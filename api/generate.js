@@ -3,12 +3,13 @@ const IMAGE_MODEL = "bytedance/seedance-2.0/fast/image-to-video";
 const json = (res, status, body) => res.status(status).setHeader("Content-Type","application/json").send(JSON.stringify(body));
 async function verifyUser(req) {
   const authHeader = req.headers.authorization || req.headers.Authorization || "";
+  const authHeader = req.headers.authorization || req.headers.Authorization || "";
   const token = (authHeader.toLowerCase().startsWith("bearer ") ? authHeader.slice(7) : authHeader).trim();
   if (!token) return { ok: false, reason: "Mungon token-i i hyrjes. Dil nga llogaria dhe hyr përsëri." };
 
   // These are the same public Supabase project settings used by the browser client.
   // Server-side variables take precedence when configured in Vercel.
-  const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || "https://yjoszxczwmhztwzmaqhy.supabase.co";
+  const url = (process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || "https://yjoszxczwmhztwzmaqhy.supabase.co").replace(/\/$/, "");
   const key = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
   if (!key) return { ok: false, reason: "Mungon VITE_SUPABASE_ANON_KEY në Vercel. Kontrollo Environment Variables dhe bëj Redeploy." };
 
