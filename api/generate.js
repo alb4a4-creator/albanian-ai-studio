@@ -15,7 +15,7 @@ async function verifyUser(req) {
   const response = await fetch(url + "/auth/v1/user", {
     headers: { apikey: key, Authorization: "Bearer " + token }
   });
-  if (response.ok) return { ok: true };
+  if (response.ok) { const user = await response.json(); return { ok: true, userId: user.id }; }
   if (response.status === 401 || response.status === 403) return { ok: false, reason: "Sesioni ka skaduar ose nuk i përket projektit Supabase. Dil nga llogaria dhe hyr përsëri." };
   return { ok: false, reason: "Supabase nuk mundi të verifikojë hyrjen (HTTP " + response.status + ")." };
 }
@@ -24,7 +24,7 @@ export default async function handler(req,res) {
   try {
     const auth = await verifyUser(req);
     if (!auth.ok) return json(res, 401, { error: auth.reason });
-    if(req.method==="GET" && req.query?.health==="1") return json(res,200,{provider:"fal.ai · Seedance 2.0 Fast",configured:Boolean(process.env.FAL_KEY)});
+    if(req.method==="GET" && req.query?.health==="1") return json(res,200,{provider:"fal.ai · Seedance 2.0 Fast",configured:Boolean(process.env.FAL_KEY && process.env.GENERATION_BILLING_ENABLED==="true"),billingEnabled:process.env.GENERATION_BILLING_ENABLED==="true"});
     const falKey=process.env.FAL_KEY;
     if(!falKey) return json(res,503,{error:"Motori AI nuk është konfiguruar ende."});
     // Safety gate: never expose an unmetered public generation endpoint.
@@ -38,11 +38,17 @@ export default async function handler(req,res) {
       const seconds=String(Math.max(4,Math.min(15,Number(duration)||5)));
       const aspect=["16:9","9:16","1:1","4:3","3:4","21:9"].includes(ratio)?ratio:"16:9";
       const model=mode==="image"?IMAGE_MODEL:TEXT_MODEL;
+      const supabaseUrl=(process.env.SUPABASE_URL||process.env.VITE_SUPABASE_URL||"https://yjoszxczwmhztwzmaqhy.supabase.co").replace(/\\/$/,"");
+      const supabaseKey=process.env.SUPABASE_ANON_KEY||process.env.VITE_SUPABASE_ANON_KEY;
+      const debit=await fetch(supabaseUrl+"/rest/v1/rpc/spend_video_credit",{method:"POST",headers:{apikey:supabaseKey,Authorization:"Bearer "+(req.headers.authorization||"").replace(/^Bearer /i,""),"Content-Type":"application/json"},body:JSON.stringify({p_reference:"video:"+Date.now()})});
+      const debitData=await debit.json().catch(()=>null);
+      const debitRow=Array.isArray(debitData)?debitData[0]:debitData;
+      if(!debit.ok||!debitRow?.success) return json(res,402,{error:debitRow?.message||"Nuk ke kredite. Merr krediti falas javor ose zgjidh një paketë."});
       const input={prompt:prompt.trim(),resolution:"720p",duration:seconds,aspect_ratio:aspect,generate_audio:true};
       if(mode==="image") input.image_url=imageData;
       const r=await fetch("https://queue.fal.run/"+model,{method:"POST",headers:{Authorization:"Key "+falKey,"Content-Type":"application/json"},body:JSON.stringify(input)});
       const data=await r.json().catch(()=>({}));
-      if(!r.ok) return json(res,r.status,{error:data.detail||data.message||"Shërbimi i videos nuk e pranoi kërkesën."});
+      if(!r.ok) { await fetch(supabaseUrl+"/rest/v1/rpc/refund_video_credit",{method:"POST",headers:{apikey:supabaseKey,Authorization:"Bearer "+(req.headers.authorization||"").replace(/^Bearer /i,""),"Content-Type":"application/json"},body:JSON.stringify({p_reference:"provider-rejected"})}).catch(()=>{}); return json(res,r.status,{error:data.detail||data.message||"Shërbimi i videos nuk e pranoi kërkesën. Krediti u kthye nëse rimbursimi u krye."}); }
       return json(res,202,{requestId:data.request_id,model,status:"IN_QUEUE"});
     }
     const requestId=String(req.query?.requestId||"");
