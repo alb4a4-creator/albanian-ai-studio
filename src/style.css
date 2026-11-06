@@ -672,3 +672,30 @@ body{background:radial-gradient(ellipse at 76% 0%,#381216 0,transparent 40%),#08
 .template-branch-out:hover img:first-child{transform:scale(1.08)}
 @media(max-width:700px){.poster-branch-layout{grid-template-columns:minmax(86px,.65fr) 25px minmax(0,2fr)!important;gap:5px!important;padding:10px 8px 8px!important}.poster-branch-results{gap:5px}.poster-branch-results .poster-panel{height:180px}.poster-branch-results .poster-panel .poster-same-person{width:60px;height:60px}.poster-branch-connector span{font-size:24px}.poster-branch-connector b{font-size:9px}.poster-branch-results .poster-panel-label{left:3px;right:3px;bottom:5px;padding:5px 2px;font-size:8px}}
 @media(max-width:440px){.poster-branch-layout{grid-template-columns:74px 18px minmax(0,1fr)!important}.poster-branch-results .poster-panel{height:150px}.poster-branch-results .poster-panel .poster-same-person{width:48px;height:48px}.poster-branch-results .poster-panel-label{font-size:7px}}
+
+/* Approved three-scene poster layout */
+.dashboard-poster-demo{background:radial-gradient(ellipse at 70% 15%,rgba(58,91,255,.18),transparent 42%),radial-gradient(ellipse at 90% 75%,rgba(112,55,255,.15),transparent 36%),linear-gradient(135deg,#050916,#090b1b 55%,#100b25);border:1px solid rgba(111,139,255,.28);border-radius:22px;box-shadow:0 22px 65px rgba(0,0,0,.32)}
+.poster-approved-header{background:transparent;border:0;padding:22px 24px 10px}
+.poster-approved-header .poster-brand b{font-size:clamp(21px,3vw,34px);font-style:normal;letter-spacing:1px}
+.poster-approved-header .poster-brand small{font-size:clamp(10px,1.2vw,15px);color:#e4e8f7}
+.poster-approved-header .poster-mark{width:70px;height:70px;font-size:55px}
+.poster-approved-header .poster-promise{background:linear-gradient(120deg,#193d9b,#6739d7);box-shadow:0 8px 26px rgba(69,87,255,.3)}
+.poster-approved-panels{grid-template-columns:minmax(180px,.92fr) 48px minmax(0,2.75fr)!important;gap:12px!important;padding:14px 20px 20px}
+.poster-approved-panels .poster-panel{height:clamp(270px,39vw,510px);border:2px solid rgba(255,255,255,.82);border-radius:20px;box-shadow:0 8px 28px rgba(0,0,0,.28)}
+.poster-approved-panels .poster-original img{filter:none;object-position:center 30%}
+.poster-approved-panels .poster-branch-results{gap:14px}
+.poster-approved-panels .poster-branch-results .poster-panel{height:clamp(270px,39vw,510px);border-color:rgba(125,158,255,.95)}
+.poster-approved-panels .poster-branch-results .poster-panel:nth-child(1){border-color:#4b9eff;box-shadow:0 0 18px rgba(47,139,255,.28)}
+.poster-approved-panels .poster-branch-results .poster-panel:nth-child(2){border-color:#a17bff;box-shadow:0 0 18px rgba(141,89,255,.28)}
+.poster-approved-panels .poster-branch-results .poster-panel:nth-child(3){border-color:#5e9fff;box-shadow:0 0 18px rgba(47,139,255,.28)}
+.poster-approved-panels .poster-branch-results .poster-same-person{width:clamp(105px,11vw,155px);height:clamp(105px,11vw,155px);top:43%;border-width:4px}
+.poster-approved-panels .poster-panel-label{font-size:clamp(11px,1.15vw,16px);padding:12px 8px;border-radius:12px}
+.poster-branch-connector{color:#8c7dff}
+.poster-branch-connector span{font-size:clamp(32px,4vw,54px);color:#fff}
+.poster-branch-connector b{color:#c9c6ff;font-size:14px}
+.poster-approved-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 22px 20px;background:transparent}
+.poster-approved-bottom .poster-categories{justify-content:flex-start;gap:8px 0;margin:0}
+.poster-approved-bottom .poster-categories span{font-size:clamp(9px,1vw,13px);border:0;padding:7px 12px;color:#f0f2ff}
+.poster-approved-bottom .poster-categories span:first-child,.poster-approved-bottom .poster-categories span:nth-child(2),.poster-approved-bottom .poster-categories span:nth-child(3),.poster-approved-bottom .poster-categories span:nth-child(4){color:#f5f6ff}
+.poster-approved-bottom>button{min-width:210px;width:auto;padding:13px 20px;font-size:15px;border:0;border-radius:999px}
+@media(max-width:650px){.poster-approved-header{padding:15px 14px 8px}.poster-approved-header .poster-mark{width:48px;height:48px;font-size:38px}.poster-approved-header .poster-promise{width:100%}.poster-approved-panels{grid-template-columns:105px 22px minmax(0,1fr)!important;gap:6px!important;padding:10px}.poster-approved-panels .poster-panel,.poster-approved-panels .poster-branch-results .poster-panel{height:225px;border-radius:12px}.poster-approved-panels .poster-branch-results{gap:6px}.poster-approved-panels .poster-branch-results .poster-same-person{width:48px;height:48px;border-width:2px}.poster-approved-panels .poster-panel-label{font-size:8px;padding:6px 3px;left:4px;right:4px;bottom:5px}.poster-branch-connector span{font-size:22px}.poster-branch-connector b{font-size:9px}.poster-approved-bottom{align-items:stretch;flex-direction:column;padding:10px}.poster-approved-bottom .poster-categories{justify-content:center}.poster-approved-bottom .poster-categories span{font-size:9px;padding:5px}.poster-approved-bottom>button{width:100%;min-width:0}}
