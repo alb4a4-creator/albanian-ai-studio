@@ -97,7 +97,8 @@ body{background:#080a11;color:#f7f7fb}
 .reference-thumb.thumb-1{background-image:url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=500&q=80')}
 .reference-thumb.thumb-2{background-image:url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=500&q=80')}
 .reference-thumb.thumb-3{background-image:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=500&q=80')}
-.reference-thumb:after{content:"";position:absolute;inset:0;background:#0001}
+.reference-thumb:after{content:"";position:absolute;inset:0;background:#0001;pointer-events:none}
+.reference-thumb video{position:relative;z-index:1;pointer-events:auto}
 .reference-thumb>button{position:absolute;z-index:1;left:50%;top:50%;transform:translate(-50%,-50%);width:48px;height:48px;border:0;border-radius:50%;background:#05070bba;color:#fff;display:grid;place-items:center}
 .reference-project-card>b{display:block;padding:10px 10px 4px;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .reference-project-card>small{display:block;padding:0 10px;color:#a2a5b2;font-size:10px}
