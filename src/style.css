@@ -641,3 +641,8 @@ body{background:radial-gradient(ellipse at 76% 0%,#381216 0,transparent 40%),#08
 @media(prefers-reduced-motion:reduce){
  .branch-poster-demo .poster-panel,.branch-poster-demo .poster-panel img,.branch-poster-demo .poster-arrow,.branch-poster-demo .poster-bottom>button{transition:none!important}
 }
+
+.dashboard-feature-heading{margin:24px 0 0;padding:0 2px}
+.dashboard-feature-heading span{font-size:10px;letter-spacing:2px;font-weight:900;color:#ff7188}
+.dashboard-feature-heading h2{margin:7px 0 0;color:#fff;font-size:clamp(19px,2.4vw,27px)}
+.dashboard-poster-demo{margin-top:14px}
