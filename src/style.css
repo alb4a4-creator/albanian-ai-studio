@@ -253,3 +253,10 @@ body{background:radial-gradient(ellipse at 76% 0%,#381216 0,transparent 40%),#08
 .language-picker button.selected{border-color:#e52b3d;background:#351218;color:#fff;box-shadow:0 0 0 1px #e52b3d inset}
 @media(max-width:760px){.reference-header{gap:8px;padding:0 5px}.language-picker{gap:3px}.language-picker button{padding:7px 8px;font-size:11px}.language-picker button span{display:none}.global-search{padding:0 10px;gap:7px}}
 @media(max-width:420px){.language-picker button{padding:7px;font-size:13px}.global-search{max-width:100px}}
+
+/* Keep the language links clear and uncluttered */
+.reference-header{justify-content:flex-end;gap:12px}
+.language-picker{margin-left:auto}
+.language-picker button{border-radius:10px;padding:9px 12px}
+@media(max-width:760px){.reference-header{justify-content:space-between;gap:6px}.language-picker{margin-left:auto}.language-picker button{padding:8px 9px}.language-picker button span{display:inline}}
+@media(max-width:390px){.language-picker button{padding:7px 6px;font-size:10px;gap:3px}.global-search{max-width:88px}}
