@@ -240,3 +240,8 @@ body{background:radial-gradient(ellipse at 76% 0%,#381216 0,transparent 40%),#08
 .hero-script{z-index:3;right:2%;top:80%;font-size:clamp(15px,1.6vw,22px);color:#fff;text-shadow:0 2px 8px #000}
 @media(max-width:800px){.hero-android{right:-3%;width:59%;opacity:.9}.reference-hero:after{background:linear-gradient(90deg,#080808 0%,#080808e8 43%,#08080855 78%)}}
 @media(max-width:560px){.hero-android{right:-14%;width:76%;opacity:.58}.hero-script{display:none}.reference-hero:after{background:linear-gradient(90deg,#080808 0%,#080808df 58%,#08080855 100%)}}
+
+/* Albanian AI Studio: uploaded full-width hero banner */
+.reference-hero{height:auto;aspect-ratio:16/9;min-height:0;background:#080808 url('/images/albanian-ai-studio-banner.webp') center/100% 100% no-repeat;border:0;border-radius:14px;box-shadow:0 12px 40px #0008}
+.reference-hero:after,.reference-hero-copy,.hero-camera,.hero-android,.hero-script{display:none!important}
+@media(max-width:650px){.reference-hero{aspect-ratio:16/9;height:auto}}
