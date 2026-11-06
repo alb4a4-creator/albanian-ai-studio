@@ -317,3 +317,71 @@ body{background:radial-gradient(ellipse at 76% 0%,#381216 0,transparent 40%),#08
 @keyframes scenePulse{0%,100%{scale:.8;opacity:.65}50%{scale:1.25;opacity:1}}
 @keyframes sceneWave{0%,100%{transform:scaleX(.55);opacity:.45}50%{transform:scaleX(1);opacity:1}}
 @media(prefers-reduced-motion:reduce){.template-scene *,.template-scene:before,.template-scene:after{animation:none!important}}
+
+
+/* Individual art direction: every template card gets a distinct animated scene */
+.scene-variant-0 .scene-object{width:30%;height:48%;left:35%;top:28%;border-radius:12px 12px 22px 22px;animation:productTurn 5s ease-in-out infinite}
+.scene-variant-0 .scene-object-two{left:60%;top:42%;width:12%;height:22%;border-radius:50%;background:linear-gradient(135deg,#fff2c5,#c77b35)}
+.scene-variant-1{background:linear-gradient(150deg,#3b1b16,#9a4d28 55%,#171016)}
+.scene-variant-1 .scene-orb{left:12%;top:18%;width:90px;height:90px;background:radial-gradient(circle,#fff5d6,#f8a64a 42%,#b63a24 70%,transparent 75%)}
+.scene-variant-1 .scene-object{left:30%;top:44%;width:55%;height:30%;border:0;border-radius:50% 50% 12px 12px;background:radial-gradient(ellipse at 50% 15%,#ffe8bc,#b84d28 55%,#54231b);filter:drop-shadow(0 12px 15px #0009);animation:foodRise 3.8s ease-in-out infinite}
+.scene-variant-1 .scene-object-two{left:40%;top:34%;width:38%;height:12%;border:0;border-radius:50%;background:#fff7d866;filter:blur(8px);animation:steam 2.2s ease-in-out infinite}
+.scene-variant-2{background:linear-gradient(130deg,#101d2d,#28536a 55%,#0b101c)}
+.scene-variant-2 .scene-object{left:18%;top:24%;width:64%;height:52%;border-radius:7px;background:linear-gradient(145deg,#d7e9ed,#3c7891 48%,#132b42);transform:perspective(500px) rotateY(-18deg);animation:buildingRise 6s ease-in-out infinite}
+.scene-variant-2 .scene-object-two{left:60%;top:10%;width:2px;height:90%;border:0;background:#9fe9ff;box-shadow:0 0 20px #6ddcff;animation:sceneScan 3s infinite}
+.scene-variant-3 .scene-object{left:25%;top:15%;width:50%;height:70%;border-radius:45% 45% 8px 8px;background:linear-gradient(90deg,#101522,#b62d4b 50%,#111426);animation:cinemaPush 5s ease-in-out infinite}
+.scene-variant-3 .scene-orb{left:12%;top:12%;width:62px;height:62px}
+.scene-variant-4{background:linear-gradient(160deg,#101a39,#5c3b91 55%,#141024)}
+.scene-variant-4 .scene-object{left:26%;top:22%;width:48%;height:55%;border-radius:50% 50% 8px 8px;background:linear-gradient(145deg,#a8c6ff,#7852b6 50%,#18152e);box-shadow:0 0 38px #a38cff88;animation:fantasyHover 4s ease-in-out infinite}
+.scene-variant-4 .scene-object-two{left:12%;top:17%;width:76%;height:2px;border:0;background:#d7caff;box-shadow:0 0 18px #c6a5ff;animation:sceneWave 3s infinite}
+.scene-variant-5{background:linear-gradient(135deg,#32133c,#10152c 70%)}
+.scene-variant-5 .scene-object{left:40%;top:18%;width:23%;height:68%;border-radius:45% 45% 30% 30%;background:linear-gradient(90deg,#f2a5ff,#5937a5 55%,#19152e);transform:rotate(-12deg);animation:animeDash 2.4s ease-in-out infinite}
+.scene-variant-5 .scene-object-two{left:15%;top:52%;width:70%;height:2px;border:0;background:#e3a5ff;box-shadow:0 0 18px #dc6aff;animation:sceneScan 1.8s infinite}
+.scene-variant-6 .scene-object{left:39%;top:10%;width:22%;height:80%;border-radius:16px;border:3px solid #fff;background:linear-gradient(180deg,#ff8cbb,#7541b5 55%,#10142a);animation:phoneTilt 4s ease-in-out infinite}
+.scene-variant-6 .scene-orb{left:18%;top:18%;width:30px;height:30px;background:#fff;box-shadow:0 0 25px #ff70c7}
+.scene-variant-7{background:linear-gradient(135deg,#431333,#17112b 65%)}
+.scene-variant-7 .scene-object{left:30%;top:22%;width:40%;height:56%;border-radius:14px;background:linear-gradient(145deg,#ffb1ce,#a12e72 55%,#27133e);animation:storyReveal 4s ease-in-out infinite}
+.scene-variant-7 .scene-object-two{left:37%;top:32%;width:26%;height:36%;border:1px solid #fff;background:transparent}
+.scene-variant-8{background:linear-gradient(120deg,#0b1927,#174c5a 60%,#111322)}
+.scene-variant-8 .scene-object{left:20%;top:30%;width:60%;height:42%;border:2px solid #75edff;border-radius:9px;background:linear-gradient(135deg,#1b5d70,#122036);animation:screenPop 3s ease-in-out infinite}
+.scene-variant-8 .scene-object-two{left:28%;top:39%;width:44%;height:3px;border:0;background:#a4f6ff;box-shadow:0 0 20px #5cecff}
+.scene-variant-9 .scene-object{left:38%;top:18%;width:24%;height:64%;border-radius:50% 50% 18px 18px;animation:portraitBreathe 4s ease-in-out infinite}
+.scene-variant-9 .scene-orb{left:70%;top:12%;width:26px;height:26px}
+.scene-variant-10{background:linear-gradient(140deg,#402b38,#9c756a 55%,#1a2029)}
+.scene-variant-10 .scene-object{left:17%;top:20%;width:66%;height:58%;border-radius:12px;border:5px solid #e8c9a5;background:linear-gradient(135deg,#f3c7a5,#775a62 50%,#253b46);animation:photoDrift 6s ease-in-out infinite}
+.scene-variant-10 .scene-object-two{left:22%;top:25%;width:56%;height:48%;border:1px solid #fff8;background:transparent}
+.scene-variant-11{background:linear-gradient(180deg,#86b6cb,#f3bd80 55%,#264e57)}
+.scene-variant-11 .scene-object{left:0;top:35%;width:100%;height:70%;border:0;border-radius:0;background:linear-gradient(145deg,transparent 0 28%,#254b58 29% 48%,transparent 49%),linear-gradient(35deg,#193c4b 0 45%,#6c9b88 46% 62%,transparent 63%);animation:landscapePan 12s ease-in-out infinite}
+.scene-variant-11 .scene-orb{left:70%;top:10%;background:#ffe5a6;box-shadow:0 0 38px #ffe5a6}
+.scene-variant-12 .scene-object{left:40%;top:24%;width:20%;height:52%;border-radius:50%;background:radial-gradient(circle,#fff,#e99cff 22%,#512c94 60%);animation:sceneSpin 5s linear infinite}
+.scene-variant-12 .scene-object-two{left:10%;top:49%;width:80%;height:3px;border:0;background:#eaa5ff;box-shadow:0 0 18px #df6aff;animation:sceneWave 1s infinite}
+.scene-variant-13{background:radial-gradient(circle at 50% 50%,#452078,#090b19 70%)}
+.scene-variant-13 .scene-object{left:35%;top:24%;width:30%;height:52%;border-radius:50%;border:3px solid #79f2ff;background:transparent;box-shadow:0 0 30px #5beaff;animation:scenePulse 1.3s infinite}
+.scene-variant-13 .scene-object-two{left:18%;top:40%;width:64%;height:20%;border:2px solid #e78cff;border-radius:50%;background:transparent;animation:sceneSpin 7s linear infinite}
+.scene-variant-14{background:linear-gradient(140deg,#43264d,#d58d72 55%,#25182e)}
+.scene-variant-14 .scene-orb{left:64%;top:10%;width:65px;height:65px;background:radial-gradient(circle,#fff1d2,#f4a76d 60%,transparent 75%)}
+.scene-variant-14 .scene-object{left:15%;top:40%;width:70%;height:35%;border:0;border-radius:50%;background:linear-gradient(90deg,#6c3a70,#f5b58d,#6c3a70);filter:blur(3px);animation:sceneFloat 5s infinite}
+.scene-variant-15 .scene-object{left:0;top:36%;width:100%;height:70%;border:0;border-radius:0;background:linear-gradient(145deg,transparent 0 22%,#243e50 23% 48%,transparent 49%),linear-gradient(35deg,#0d2837 0 38%,#3c766c 39% 63%,transparent 64%);animation:landscapePan 10s infinite}
+.scene-variant-15 .scene-orb{left:70%;top:12%;width:54px;height:54px}
+.scene-variant-16{background:linear-gradient(180deg,#101a35,#4b2c76 55%,#10131e)}
+.scene-variant-16 .scene-object{left:18%;top:30%;width:64%;height:56%;border:0;border-radius:6px;background:repeating-linear-gradient(90deg,#151a32 0 13px,#573e83 14px 18px);box-shadow:0 0 35px #ac6bff66;animation:citySlide 7s linear infinite}
+.scene-variant-16 .scene-object-two{left:0;top:75%;width:100%;height:3px;border:0;background:#b8e9ff;box-shadow:0 0 20px #9ceaff;animation:sceneScan 2s infinite}
+.scene-variant-17{background:linear-gradient(180deg,#4b9fc1,#f6c48c 55%,#15566b)}
+.scene-variant-17 .scene-object{left:0;top:48%;width:100%;height:60%;border:0;border-radius:0;background:repeating-linear-gradient(170deg,#147c99 0 13px,#48bad0 14px 22px,#1c718d 23px 31px);animation:seaWaves 3s ease-in-out infinite}
+.scene-variant-17 .scene-object-two{left:68%;top:18%;width:12%;height:48%;border:0;border-radius:50%;background:linear-gradient(90deg,#245344,#77a65b,#245344);animation:sceneFloat 3s infinite}
+@keyframes productTurn{0%,100%{transform:perspective(400px) rotateY(-24deg) rotateX(8deg) translateY(0)}50%{transform:perspective(400px) rotateY(24deg) rotateX(-5deg) translateY(-9px)}}
+@keyframes foodRise{0%,100%{transform:translateY(7px) scale(.96)}50%{transform:translateY(-7px) scale(1.04)}}
+@keyframes steam{0%,100%{transform:translateY(8px) scaleX(.8);opacity:.2}50%{transform:translateY(-18px) scaleX(1.2);opacity:.8}}
+@keyframes buildingRise{0%,100%{transform:perspective(500px) rotateY(-18deg) translateY(4px)}50%{transform:perspective(500px) rotateY(12deg) translateY(-7px)}}
+@keyframes cinemaPush{0%,100%{transform:scale(.94)}50%{transform:scale(1.08)}}
+@keyframes fantasyHover{0%,100%{transform:translateY(5px) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+@keyframes animeDash{0%,100%{translate:0 0;rotate:-8deg}50%{translate:18px -8px;rotate:8deg}}
+@keyframes phoneTilt{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+@keyframes storyReveal{0%,100%{transform:scale(.92) rotate(-4deg)}50%{transform:scale(1.04) rotate(4deg)}}
+@keyframes screenPop{0%,100%{transform:scale(.94)}50%{transform:scale(1.04)}}
+@keyframes portraitBreathe{0%,100%{transform:scale(.98) translateY(3px)}50%{transform:scale(1.04) translateY(-3px)}}
+@keyframes photoDrift{0%,100%{transform:translateX(-5px) rotate(-2deg)}50%{transform:translateX(5px) rotate(2deg)}}
+@keyframes landscapePan{0%,100%{transform:translateX(-3%)}50%{transform:translateX(3%)}}
+@keyframes citySlide{0%,100%{transform:translateX(-4%)}50%{transform:translateX(4%)}}
+@keyframes seaWaves{0%,100%{transform:translateY(4px) skewY(-2deg)}50%{transform:translateY(-4px) skewY(2deg)}}
+@media(prefers-reduced-motion:reduce){.template-scene *,.template-scene:before,.template-scene:after{animation:none!important}}
