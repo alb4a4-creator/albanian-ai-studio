@@ -249,7 +249,8 @@ function App({userId}){
   {dramaScript&&<div style={{marginTop:22}}><label style={{fontWeight:700}}>Skenari yt i krijuar me AI</label><textarea readOnly value={dramaScript} rows={22} style={{width:'100%',padding:14,borderRadius:10,marginTop:8}}/><button className="generate" onClick={()=>{navigator.clipboard?.writeText(dramaScript);setDramaScriptNotice('Skenari u kopjua.')}}><Copy size={15}/> Kopjo skenarin</button></div>}
   <p className="hint" style={{marginTop:16}}>Gjenerimi i skenarit lidhet me ZAI (GLM). Krijimi i aktorëve virtualë, zërave dhe videos kërkon lidhjen e motorëve përkatës të imazhit, zërit dhe videos.</p>
  </div></section>}
- \n  {tab==='dramaEmotion'&&<section className="other voice-page">
+ 
+  {tab==='dramaEmotion'&&<section className="other voice-page">
  <label>AI VIDEO EFFECTS</label><h1>DRAMA Emotion</h1><p>Ndrysho emocionin e fytyrës në video dhe përgatit Lip Sync.</p>
  <div className="voice-generator-card" style={{maxWidth:760}}>
   <div className="voice-free-head"><span className="voice-free-icon"><Film size={24}/></span><div><b>DRAMA Emotion Studio</b><small>Emotion control · Lip Sync · Video</small></div><span className="voice-free-tag">BETA</span></div>
