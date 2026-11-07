@@ -4,6 +4,7 @@ import {Sparkles,Film,Image as ImageIcon,FolderOpen,Settings,Plus,Play,Upload,Me
 import './style.css';
 import { supabase, supabaseConfigured } from './lib/supabase';
 import VoiceCreator from './VoiceCreator';
+import OpenAIHub from './OpenAIHub';
 
 const copy={
  sq:{studio:'Studio',projects:'Projektet e mia',templates:'Modele',settings:'Cilësimet',create:'Krijo një video të re',subtitle:'Ktheje idenë tënde në një histori vizuale.',text:'Tekst në video',image:'Foto në video',prompt:'Përshkruaj videon që dëshiron të krijosh',promptHint:'P.sh. Një makinë sportive e zezë kalon nëpër rrugët e qytetit natën, shi, drita kinematografike...',upload:'Ngarko një fotografi',uploadHint:'PNG, JPG ose WEBP · Zgjidh foton që do të animosh',ratio:'Formati',duration:'Kohëzgjatja',style:'Stili vizual',real:'Realist',cinema:'Kinematografik',three:'3D realist',anime:'Anime',generate:'Përgatit projektin',preview:'Parapamja',recent:'Projektet e fundit',all:'Shiko të gjitha',empty:'Ende nuk ke projekte',emptyHint:'Krijo projektin tënd të parë në Studio.',save:'Ruaj projektin',saved:'Projekti u ruajt në këtë pajisje.',backend:'Motori i videos AI nuk është lidhur ende. Projekti u ruajt si draft; për gjenerim real duhet të konfigurohet një ofrues AI dhe çelësi i tij në server.',draft:'Draft',today:'Sot',delete:'Fshi',back:'Kthehu në Studio',templatesHint:'Nis me një ide të gatshme dhe përshtate sipas dëshirës.',settingsHint:'Cilësimet e projektit ruhen lokalisht në këtë pajisje.',language:'Gjuha',noImage:'Ngarko një fotografi për të parë parapamjen.',copy:'Kopjo përshkrimin',copied:'U kopjua!',choose:'Zgjidh një model',new:'Projekt i ri',status:'Gati për konfigurim',privacy:'Projektet draft ruhen vetëm në këtë shfletues. Mos vendos të dhëna private në përshkrime.'},
@@ -158,6 +159,7 @@ function App({userId}){
  <button className={'nav '+(tab==='projects'?'active':'')} onClick={()=>{setTab('projects');setMobile(false)}}><FolderOpen/>{t.navProjects}</button>
  <button className={'nav '+(tab==='studio'?'active':'')} onClick={()=>{setMode('text');setTab('studio');setMobile(false)}}><Sparkles/>{t.navCreate}</button>
  <button className={'nav '+(tab==='creator'?'active':'')} onClick={()=>{setTab('creator');setMobile(false)}}><Sparkles/>{t.navCreator}</button>
+ <button className={'nav '+(tab==='aiAssistant'?'active':'')} onClick={()=>{setTab('aiAssistant');setMobile(false)}}><Sparkles size={17}/> Asistenti AI</button>
  <button className={'nav '+(tab==='voice'?'active':'')} onClick={()=>{setTab('voice');setMobile(false)}}><Languages size={17}/> AI Voice Studio</button>
  <button className={'nav '+(tab==='avatar'?'active':'')} onClick={()=>{setTab('avatar');setMobile(false)}}><ImageIcon size={17}/> AI Avatar Studio</button>
  <button className={'nav '+(tab==='drama'?'active':'')} onClick={()=>{setTab('drama');setMobile(false)}}><Clapperboard size={17}/> Drama AI Studio</button>
@@ -172,6 +174,7 @@ function App({userId}){
  </aside>
  <main className="reference-main"><header className="reference-header"><button className="mobile" onClick={()=>setMobile(!mobile)}><Menu/></button><div className="global-search"><Search/><input placeholder={lang==="sq"?"Kërko projektet...":lang==="en"?"Search projects...":"Projekte suchen..."}/></div><div className="language-picker" role="group" aria-label="Zgjidh gjuhën"><button type="button" className={lang==="sq"?"selected":""} onClick={()=>setLang("sq")}>🇦🇱 <span>Shqip</span></button><button type="button" className={lang==="en"?"selected":""} onClick={()=>setLang("en")}>🇺🇸 <span>English</span></button><button type="button" className={lang==="de"?"selected":""} onClick={()=>setLang("de")}>🇩🇪 <span>Deutsch</span></button></div></header>
  <input ref={fileRef} type="file" accept="image/png,image/jpeg,image/webp" hidden onChange={uploadFile}/>
+ {tab==='aiAssistant'&&<OpenAIHub/>}
  {tab==='dashboard'&&
 <section className="dashboard reference-dashboard">
  <div className="reference-hero"><div className="reference-hero-copy"><h1>Albanian <em>AI Studio</em></h1><h2>{t.heroLine}</h2><p>{t.heroSub}</p><button onClick={()=>openStudio('text')}><Play size={15} fill="currentColor"/> {t.startNow} <ArrowUpRight size={15}/></button><button className="reference-action" onClick={()=>setTab('creator')}><Sparkles size={15}/> {t.heroCreator}</button></div><div className="hero-camera"></div><div className="hero-android"><img src="/images/albanian-ai-robot-hero.webp" alt={t.heroCreator}/></div><div className="hero-script">{t.heroLine}</div></div>
