@@ -38,7 +38,7 @@ export default async function handler(req,res) {
       const seconds=String(Math.max(4,Math.min(15,Number(duration)||5)));
       const aspect=["16:9","9:16","1:1","4:3","3:4","21:9"].includes(ratio)?ratio:"16:9";
       const model=mode==="image"?IMAGE_MODEL:TEXT_MODEL;
-      const supabaseUrl=(process.env.SUPABASE_URL||process.env.VITE_SUPABASE_URL||"https://yjoszxczwmhztwzmaqhy.supabase.co").replace(/\\/$/,"");
+      const supabaseUrl=(process.env.SUPABASE_URL||process.env.VITE_SUPABASE_URL||"https://yjoszxczwmhztwzmaqhy.supabase.co").replace(/\/$/,"");
       const supabaseKey=process.env.SUPABASE_ANON_KEY||process.env.VITE_SUPABASE_ANON_KEY;
       const debit=await fetch(supabaseUrl+"/rest/v1/rpc/spend_video_credit",{method:"POST",headers:{apikey:supabaseKey,Authorization:"Bearer "+(req.headers.authorization||"").replace(/^Bearer /i,""),"Content-Type":"application/json"},body:JSON.stringify({p_reference:"video:"+Date.now()})});
       const debitData=await debit.json().catch(()=>null);
