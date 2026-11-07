@@ -1,75 +1,130 @@
-const TEXT_MODEL = "bytedance/seedance-2.0/fast/text-to-video";
-const IMAGE_MODEL = "bytedance/seedance-2.0/fast/image-to-video";
-const json = (res, status, body) => res.status(status).setHeader("Content-Type","application/json").send(JSON.stringify(body));
+const TEXT_MODEL = "wan-2.6";
+const IMAGE_MODEL = "wan-2.6-i2v";
+const API_BASE = "https://api.renderful.ai/api/v1";
+const json = (res, status, body) => res.status(status).setHeader("Content-Type", "application/json").send(JSON.stringify(body));
+
 async function verifyUser(req) {
   const authHeader = req.headers.authorization || req.headers.Authorization || "";
   const token = (authHeader.toLowerCase().startsWith("bearer ") ? authHeader.slice(7) : authHeader).trim();
   if (!token) return { ok: false, reason: "Mungon token-i i hyrjes. Dil nga llogaria dhe hyr përsëri." };
-
-  // These are the same public Supabase project settings used by the browser client.
-  // Server-side variables take precedence when configured in Vercel.
-  const url = (process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || "https://yjoszxczwmhztwzmaqhy.supabase.co").replace(/\/$/, "");
+  const url = (process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || "").replace(/\/$/, "");
   const key = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
-  if (!key) return { ok: false, reason: "Mungon VITE_SUPABASE_ANON_KEY në Vercel. Kontrollo Environment Variables dhe bëj Redeploy." };
-
-  const response = await fetch(url + "/auth/v1/user", {
-    headers: { apikey: key, Authorization: "Bearer " + token }
-  });
+  if (!url || !key) return { ok: false, reason: "Mungon konfigurimi i Supabase në Vercel." };
+  const response = await fetch(url + "/auth/v1/user", { headers: { apikey: key, Authorization: "Bearer " + token } });
   if (response.ok) { const user = await response.json(); return { ok: true, userId: user.id }; }
-  if (response.status === 401 || response.status === 403) return { ok: false, reason: "Sesioni ka skaduar ose nuk i përket projektit Supabase. Dil nga llogaria dhe hyr përsëri." };
+  if (response.status === 401 || response.status === 403) return { ok: false, reason: "Sesioni ka skaduar. Dil nga llogaria dhe hyr përsëri." };
   return { ok: false, reason: "Supabase nuk mundi të verifikojë hyrjen (HTTP " + response.status + ")." };
 }
-export default async function handler(req,res) {
-  if(req.method!=="POST" && req.method!=="GET") return json(res,405,{error:"Method not allowed"});
+
+function supabaseConfig() {
+  return {
+    url: (process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || "").replace(/\/$/, ""),
+    key: process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY
+  };
+}
+
+async function refundCredit(url, key, token) {
+  await fetch(url + "/rest/v1/rpc/refund_video_credit", {
+    method: "POST",
+    headers: { apikey: key, Authorization: "Bearer " + token, "Content-Type": "application/json" },
+    body: JSON.stringify({ p_reference: "provider-rejected" })
+  }).catch(() => {});
+}
+
+async function uploadImage(apiKey, dataUrl) {
+  const match = /^data:image\/(png|jpeg|webp);base64,([A-Za-z0-9+/=]+)$/.exec(dataUrl);
+  if (!match) throw new Error("Fotografia nuk ka format të vlefshëm.");
+  const mime = match[1] === "jpg" ? "image/jpeg" : "image/" + match[1];
+  const bytes = Buffer.from(match[2], "base64");
+  const form = new FormData();
+  form.append("file", new Blob([bytes], { type: mime }), "reference." + (match[1] === "jpeg" ? "jpg" : match[1]));
+  const response = await fetch(API_BASE + "/uploads", {
+    method: "POST",
+    headers: { Authorization: "Bearer " + apiKey },
+    body: form
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok || !data.url) throw new Error(data.error || "Renderful nuk mundi ta ngarkojë fotografinë.");
+  return data.url;
+}
+
+export default async function handler(req, res) {
+  if (req.method !== "POST" && req.method !== "GET") return json(res, 405, { error: "Method not allowed" });
   try {
     const auth = await verifyUser(req);
     if (!auth.ok) return json(res, 401, { error: auth.reason });
-    if(req.method==="GET" && req.query?.health==="1") return json(res,200,{provider:"fal.ai · Seedance 2.0 Fast",configured:Boolean(process.env.FAL_KEY && process.env.GENERATION_BILLING_ENABLED==="true"),billingEnabled:process.env.GENERATION_BILLING_ENABLED==="true"});
-    const falKey=process.env.FAL_KEY;
-    if(!falKey) return json(res,503,{error:"Motori AI nuk është konfiguruar ende."});
-    // Safety gate: never expose an unmetered public generation endpoint.
-    // Enable only after credits, quotas, and customer billing are enforced server-side.
-    if(req.method==="POST" && process.env.GENERATION_BILLING_ENABLED!=="true") return json(res,503,{error:"Gjenerimi i videove do të aktivizohet pasi të vendoset sistemi i krediteve dhe kufijtë e përdorimit."});
-    if(req.method==="POST") {
-      const {prompt,mode,duration,ratio,imageData}=req.body||{};
-      if(typeof prompt!=="string"||prompt.trim().length<3||prompt.length>4000) return json(res,400,{error:"Përshkrimi duhet të ketë 3–4000 karaktere."});
-      if(!["text","image"].includes(mode)) return json(res,400,{error:"Modalitet i pavlefshëm."});
-      if(mode==="image" && (typeof imageData!=="string"||!/^data:image\/(png|jpeg|webp);base64,/.test(imageData)||imageData.length>5_000_000)) return json(res,400,{error:"Ngarko një fotografi të vlefshme, deri në rreth 3.5 MB."});
-      const seconds=String(Math.max(4,Math.min(15,Number(duration)||5)));
-      const aspect=["16:9","9:16","1:1","4:3","3:4","21:9"].includes(ratio)?ratio:"16:9";
-      const model=mode==="image"?IMAGE_MODEL:TEXT_MODEL;
-      const supabaseUrl=(process.env.SUPABASE_URL||process.env.VITE_SUPABASE_URL||"https://yjoszxczwmhztwzmaqhy.supabase.co").replace(/\/$/,"");
-      const supabaseKey=process.env.SUPABASE_ANON_KEY||process.env.VITE_SUPABASE_ANON_KEY;
-      const debit=await fetch(supabaseUrl+"/rest/v1/rpc/spend_video_credit",{method:"POST",headers:{apikey:supabaseKey,Authorization:"Bearer "+(req.headers.authorization||"").replace(/^Bearer /i,""),"Content-Type":"application/json"},body:JSON.stringify({p_reference:"video:"+Date.now()})});
-      const debitData=await debit.json().catch(()=>null);
-      const debitRow=Array.isArray(debitData)?debitData[0]:debitData;
-      if(!debit.ok||!debitRow?.success) return json(res,402,{error:debitRow?.message||"Nuk ke kredite. Merr krediti falas javor ose zgjidh një paketë."});
-      const input={prompt:prompt.trim(),resolution:"720p",duration:seconds,aspect_ratio:aspect,generate_audio:true};
-      if(mode==="image") input.image_url=imageData;
-      const r=await fetch("https://queue.fal.run/"+model,{method:"POST",headers:{Authorization:"Key "+falKey,"Content-Type":"application/json"},body:JSON.stringify(input)});
-      const data=await r.json().catch(()=>({}));
-      if(!r.ok) { await fetch(supabaseUrl+"/rest/v1/rpc/refund_video_credit",{method:"POST",headers:{apikey:supabaseKey,Authorization:"Bearer "+(req.headers.authorization||"").replace(/^Bearer /i,""),"Content-Type":"application/json"},body:JSON.stringify({p_reference:"provider-rejected"})}).catch(()=>{}); return json(res,r.status,{error:data.detail||data.message||"Shërbimi i videos nuk e pranoi kërkesën. Krediti u kthye nëse rimbursimi u krye."}); }
-      return json(res,202,{requestId:data.request_id,model,status:"IN_QUEUE"});
+
+    const apiKey = process.env.RENDERFUL_API_KEY;
+    const billingEnabled = process.env.GENERATION_BILLING_ENABLED === "true";
+
+    if (req.method === "GET" && req.query?.health === "1") {
+      if (!apiKey || !billingEnabled) return json(res, 200, { provider: "Renderful · WAN 2.6", configured: false, billingEnabled });
+      const balanceRes = await fetch(API_BASE + "/account/balance", { headers: { Authorization: "Bearer " + apiKey } });
+      const balanceData = await balanceRes.json().catch(() => ({}));
+      return json(res, 200, { provider: "Renderful · WAN 2.6", configured: balanceRes.ok, billingEnabled, providerStatus: balanceRes.ok ? "connected" : "authentication_failed" });
     }
-    const requestId=String(req.query?.requestId||"");
-    const model=String(req.query?.model||"");
-    if(!/^[0-9a-f-]{20,}$/i.test(requestId)||![TEXT_MODEL,IMAGE_MODEL].includes(model)) return json(res,400,{error:"Kërkesë e pavlefshme."});
-    const base="https://queue.fal.run/"+model+"/requests/"+encodeURIComponent(requestId);
-    const statusRes=await fetch(base+"/status",{headers:{Authorization:"Key "+falKey}});
-    const statusData=await statusRes.json().catch(()=>({}));
-    if(!statusRes.ok) return json(res,statusRes.status,{error:statusData.detail||"Nuk u lexua statusi i videos."});
-    if(statusData.status==="COMPLETED") {
-      const resultRes=await fetch(base,{headers:{Authorization:"Key "+falKey}});
-      const result=await resultRes.json().catch(()=>({}));
-      if(!resultRes.ok) return json(res,resultRes.status,{error:result.detail||"Videoja nuk mund të merret."});
-      const videoUrl=result.video?.url||result.output?.video?.url;
-      if(!videoUrl) return json(res,502,{error:"Gjenerimi përfundoi, por shërbimi nuk ktheu lidhjen e videos."});
-      return json(res,200,{status:"COMPLETED",videoUrl});
+
+    if (!apiKey) return json(res, 503, { error: "Motori Renderful nuk është konfiguruar. Kontrollo RENDERFUL_API_KEY në Vercel." });
+    if (!billingEnabled) return json(res, 503, { error: "Gjenerimi mbetet i mbyllur derisa të aktivizohet sistemi i krediteve." });
+
+    if (req.method === "POST") {
+      const { prompt, mode, duration, ratio, imageData } = req.body || {};
+      if (typeof prompt !== "string" || prompt.trim().length < 3 || prompt.length > 4000) return json(res, 400, { error: "Përshkrimi duhet të ketë 3–4000 karaktere." });
+      if (!["text", "image"].includes(mode)) return json(res, 400, { error: "Modalitet i pavlefshëm." });
+      if (mode === "image" && (typeof imageData !== "string" || !/^data:image\/(png|jpeg|webp);base64,/.test(imageData) || imageData.length > 5_000_000)) return json(res, 400, { error: "Ngarko një fotografi të vlefshme, deri në rreth 3.5 MB." });
+
+      const seconds = Math.max(4, Math.min(15, Number(duration) || 5));
+      const aspect = ["16:9", "9:16", "1:1", "4:3", "3:4", "21:9"].includes(ratio) ? ratio : "16:9";
+      const model = mode === "image" ? IMAGE_MODEL : TEXT_MODEL;
+      const { url, key } = supabaseConfig();
+      const token = (req.headers.authorization || "").replace(/^Bearer /i, "");
+      if (!url || !key) return json(res, 503, { error: "Mungon konfigurimi i Supabase." });
+
+      const debit = await fetch(url + "/rest/v1/rpc/spend_video_credit", {
+        method: "POST",
+        headers: { apikey: key, Authorization: "Bearer " + token, "Content-Type": "application/json" },
+        body: JSON.stringify({ p_reference: "video:" + Date.now() })
+      });
+      const debitData = await debit.json().catch(() => null);
+      const debitRow = Array.isArray(debitData) ? debitData[0] : debitData;
+      if (!debit.ok || !debitRow?.success) return json(res, 402, { error: debitRow?.message || "Nuk ke kredite. Merr krediti falas javor ose zgjidh një paketë." });
+
+      try {
+        const input = { type: mode === "image" ? "image-to-video" : "text-to-video", model, prompt: prompt.trim(), duration: seconds, aspect_ratio: aspect };
+        if (mode === "image") input.image_url = await uploadImage(apiKey, imageData);
+        const response = await fetch(API_BASE + "/generations", {
+          method: "POST",
+          headers: { Authorization: "Bearer " + apiKey, "Content-Type": "application/json" },
+          body: JSON.stringify(input)
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.id) {
+          await refundCredit(url, key, token);
+          return json(res, response.status || 502, { error: data.error || data.message || "Renderful nuk e pranoi kërkesën. Krediti u kthye nëse rimbursimi u krye." });
+        }
+        return json(res, 202, { requestId: data.id, model, status: data.status || "queued" });
+      } catch (error) {
+        await refundCredit(url, key, token);
+        return json(res, 502, { error: error.message || "Nuk u dërgua kërkesa te Renderful. Krediti u kthye nëse rimbursimi u krye." });
+      }
     }
-    if(statusData.status==="FAILED") return json(res,502,{status:"FAILED",error:statusData.error||"Gjenerimi i videos dështoi."});
-    return json(res,200,{status:statusData.status||"IN_PROGRESS",logs:statusData.logs||[]});
-  } catch(err) {
-    console.error("Video generation API error",err);
-    return json(res,500,{error:"Gabim i brendshëm gjatë krijimit të videos."});
+
+    const requestId = String(req.query?.requestId || "");
+    const model = String(req.query?.model || "");
+    if (!/^[A-Za-z0-9_-]{5,100}$/.test(requestId) || ![TEXT_MODEL, IMAGE_MODEL].includes(model)) return json(res, 400, { error: "Kërkesë e pavlefshme." });
+    const response = await fetch(API_BASE + "/generations/" + encodeURIComponent(requestId), { headers: { Authorization: "Bearer " + apiKey } });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) return json(res, response.status, { error: data.error || "Nuk u lexua statusi i videos." });
+    if (data.status === "completed") {
+      const output = Array.isArray(data.outputs) ? data.outputs[0] : null;
+      const videoUrl = typeof output === "string" ? output : output?.url;
+      if (!videoUrl) return json(res, 502, { error: "Gjenerimi përfundoi, por Renderful nuk ktheu lidhjen e videos." });
+      return json(res, 200, { status: "COMPLETED", videoUrl });
+    }
+    if (data.status === "failed") return json(res, 502, { status: "FAILED", error: data.error || "Gjenerimi i videos dështoi." });
+    return json(res, 200, { status: String(data.status || "processing").toUpperCase() });
+  } catch (err) {
+    console.error("Renderful video generation API error", err);
+    return json(res, 500, { error: "Gabim i brendshëm gjatë krijimit të videos." });
   }
 }
