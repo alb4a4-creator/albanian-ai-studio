@@ -48,7 +48,7 @@ export default function AIBridge(){
       <textarea value={prompt} onChange={e=>setPrompt(e.target.value)} rows={5} maxLength={10000} placeholder="P.sh. Analizoni këtë ide për Albanian AI Studio dhe propozoni mënyrën më të mirë për ta realizuar…" style={{width:"100%",padding:14,borderRadius:10,resize:"vertical"}}/>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:12,flexWrap:"wrap",marginTop:12}}>
         <small style={{opacity:.7}}>{prompt.length}/10000</small>
-        <button className="generate" type="button" onClick={runBridge} disabled={!prompt.trim()||busy} style={{opacity:!prompt.trim()||busy?.6:1}}>
+        <button className="generate" type="button" onClick={runBridge} disabled={!prompt.trim()||busy} style={{opacity:!prompt.trim()||busy ? 0.6 : 1}}>
           {busy?<LoaderCircle size={17} className="spin"/>:<Sparkles size={17}/>}
           {busy?"Po komunikojnë…":"Nis bashkëpunimin"}
         </button>
