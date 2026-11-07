@@ -717,3 +717,28 @@ body{background:radial-gradient(ellipse at 76% 0%,#381216 0,transparent 40%),#08
 .template-library .template p{min-height:34px;margin:0 2px 12px;color:#b7bfd5;font-size:11px}
 .template-library .template>button{margin:0 2px 2px;border:0;border-radius:999px;padding:10px 16px;background:linear-gradient(110deg,#334fc0,#7148d9);box-shadow:0 6px 18px rgba(69,75,210,.25);font-size:11px}
 @media(max-width:620px){.template-library .templategrid{grid-template-columns:1fr;gap:14px}.template-library .template-branch-preview{height:190px;grid-template-columns:minmax(74px,.78fr) 20px minmax(0,2fr);gap:6px;padding:8px}.template-library .template-branch-outs{gap:5px}.template-library .template-same-person{width:42px;height:42px}}
+
+
+/* Reliable model selection and image upload on touch devices */
+.reference-main button,
+.reference-main .tabs,
+.reference-main .tabs button,
+.reference-main .upload,
+.reference-main .template-library .template button,
+.reference-main .studio-launch-grid>button{
+  pointer-events:auto;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:rgba(255,70,90,.18);
+}
+.reference-main .tabs,
+.reference-main .tabs button,
+.reference-main .upload,
+.reference-main .template-library .template button,
+.reference-main .studio-launch-grid>button{
+  position:relative;
+  z-index:8;
+}
+.reference-main .template-branch-preview,
+.reference-main .template-branch-preview *{
+  pointer-events:none;
+}
