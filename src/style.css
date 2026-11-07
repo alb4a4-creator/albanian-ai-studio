@@ -699,3 +699,21 @@ body{background:radial-gradient(ellipse at 76% 0%,#381216 0,transparent 40%),#08
 .poster-approved-bottom .poster-categories span:first-child,.poster-approved-bottom .poster-categories span:nth-child(2),.poster-approved-bottom .poster-categories span:nth-child(3),.poster-approved-bottom .poster-categories span:nth-child(4){color:#f5f6ff}
 .poster-approved-bottom>button{min-width:210px;width:auto;padding:13px 20px;font-size:15px;border:0;border-radius:999px}
 @media(max-width:650px){.poster-approved-header{padding:15px 14px 8px}.poster-approved-header .poster-mark{width:48px;height:48px;font-size:38px}.poster-approved-header .poster-promise{width:100%}.poster-approved-panels{grid-template-columns:105px 22px minmax(0,1fr)!important;gap:6px!important;padding:10px}.poster-approved-panels .poster-panel,.poster-approved-panels .poster-branch-results .poster-panel{height:225px;border-radius:12px}.poster-approved-panels .poster-branch-results{gap:6px}.poster-approved-panels .poster-branch-results .poster-same-person{width:48px;height:48px;border-width:2px}.poster-approved-panels .poster-panel-label{font-size:8px;padding:6px 3px;left:4px;right:4px;bottom:5px}.poster-branch-connector span{font-size:22px}.poster-branch-connector b{font-size:9px}.poster-approved-bottom{align-items:stretch;flex-direction:column;padding:10px}.poster-approved-bottom .poster-categories{justify-content:center}.poster-approved-bottom .poster-categories span{font-size:9px;padding:5px}.poster-approved-bottom>button{width:100%;min-width:0}}
+
+
+/* Approved ALBANIAN AI STUDIO 1-photo-to-3-scenes layout on all 18 model cards */
+.template-library .templategrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.template-library .template{padding:14px;border:1px solid rgba(112,145,255,.32);border-radius:18px;background:radial-gradient(ellipse at 78% 12%,rgba(65,85,220,.16),transparent 48%),linear-gradient(145deg,#101426,#090b14 75%);box-shadow:0 12px 32px rgba(0,0,0,.22);transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease}
+.template-library .template:hover{transform:translateY(-4px);border-color:rgba(132,164,255,.78);box-shadow:0 18px 38px rgba(24,48,125,.25),0 0 20px rgba(83,104,255,.12)}
+.template-library .template-branch-preview{height:clamp(170px,19vw,235px);grid-template-columns:minmax(75px,.78fr) 24px minmax(0,2fr);gap:8px;padding:10px;border:1px solid rgba(139,163,255,.35);border-radius:15px;background:radial-gradient(ellipse at 72% 12%,rgba(67,91,255,.22),transparent 48%),linear-gradient(135deg,#080d20,#15122b 65%,#090d18);box-shadow:inset 0 0 24px rgba(79,94,255,.08)}
+.template-library .template-branch-source,.template-library .template-branch-out{border:1px solid rgba(255,255,255,.72);border-radius:10px;box-shadow:0 5px 16px rgba(0,0,0,.28)}
+.template-library .template-branch-outs{gap:7px}
+.template-library .template-branch-source img,.template-library .template-branch-out>img:first-child{transition:transform .55s cubic-bezier(.2,.8,.2,1),filter .55s ease}
+.template-library .template-branch-source:hover img,.template-library .template-branch-out:hover>img:first-child{transform:scale(1.09);filter:brightness(1.12)}
+.template-library .template-branch-arrow{font-size:24px;color:#9c91ff;text-shadow:0 0 16px rgba(104,117,255,.85);animation:posterPulse 1.8s ease-in-out infinite}
+.template-library .template-same-person{width:clamp(35px,4.2vw,54px);height:clamp(35px,4.2vw,54px);border:2px solid #fff}
+.template-library .template-branch-label{top:7px;right:7px;border-color:rgba(140,158,255,.55);background:rgba(7,12,30,.86);color:#e1e5ff}
+.template-library .template h3{margin:13px 2px 5px;color:#fff;font-size:16px}
+.template-library .template p{min-height:34px;margin:0 2px 12px;color:#b7bfd5;font-size:11px}
+.template-library .template>button{margin:0 2px 2px;border:0;border-radius:999px;padding:10px 16px;background:linear-gradient(110deg,#334fc0,#7148d9);box-shadow:0 6px 18px rgba(69,75,210,.25);font-size:11px}
+@media(max-width:620px){.template-library .templategrid{grid-template-columns:1fr;gap:14px}.template-library .template-branch-preview{height:190px;grid-template-columns:minmax(74px,.78fr) 20px minmax(0,2fr);gap:6px;padding:8px}.template-library .template-branch-outs{gap:5px}.template-library .template-same-person{width:42px;height:42px}}
